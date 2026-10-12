@@ -1084,7 +1084,7 @@
             <div class="icon">📣</div>
             <h3>YAAAAAAAAA</h3>
             <p>For absolutely no reason. Obviously.</p>
-          </div><button class="btn" onclick="yaa()">Play the imaginary sound 😂</button>
+          </div><button class="btn" onclick="yaa()">Play the actual YAAAAA 😂</button>
         </article>
       </div>
       <p class="delivery-status" id="deliveryStatus" aria-live="polite">Connecting our little love-line…</p>
@@ -1158,6 +1158,9 @@
     <footer>made with pyaar, thodi bakwaas, and one very loud YAAAAAAA ♡</footer>
   </div>
   <div class="toast" id="toast" role="status"></div>
+  <audio id="yaaaAudio" preload="metadata">
+    <source src="yaaaa.mpeg" type="audio/mpeg">
+  </audio>
   <div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo viewer">
     <button type="button" aria-label="Close photo viewer" onclick="closePhoto()">×</button>
     <button class="viewer-arrow viewer-prev" type="button" aria-label="Previous photo" onclick="stepPhoto(-1)">‹</button>
@@ -1261,7 +1264,11 @@
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reactions' }, refreshReactions)
         .subscribe();
     }());
-    function yaa() { toast('YAAAAAAAAAAAAAAAAA 😂 (imagine my actual voice, please)') }
+    function yaa() {
+      const audio = document.getElementById('yaaaAudio');
+      audio.currentTime = 0;
+      audio.play().then(() => toast('YAAAAAAAAAAAAAAAAA 😂')).catch(() => toast('Could not play the YAAAAA recording. Try once more.'));
+    }
     function achha() { document.getElementById('chaosStatus').textContent = '“Achha ye…” 👀'; }
     function kya() { document.getElementById('chaosStatus').textContent = '“KYA HAI?” 😂 maalkin caught herself in 4K.'; }
     const prompts = ['Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸', 'Humari kaunsi memory replay karni hai abhi? ♡', 'Aaj ek cheez batao jo tumhe hasaa gayi. 😂', 'Agar abhi chai walk pe ja sakte, toh kya order karte? ☕', 'Ek random compliment bhejo. No thinking, bas bolo. 💌', 'Aaj ka mood ek song se describe karo. 🎧', 'Aaj ek “yaaaaaaaa” voice note banta hai. 😂'];
