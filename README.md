@@ -8,7 +8,7 @@ Updates:
 - Photo counter included.
 
 Preview:
-Open `index-single-file.html` for a one-file preview with all images embedded.
+Open `index.html` locally, keeping the `assets/` folder beside it.
 
 Vercel:
 Deploy `index.html` and the entire `assets/` folder together. No build command needed.
@@ -20,3 +20,7 @@ Live hugs and kisses:
 3. Deploy `index.html`, `assets/`, and `supabase-config.js` to Vercel together.
 
 Both phones will immediately see the same live hug and kiss totals. The setup intentionally stores only each reaction type and its timestamp. Do not put a Supabase `service_role` or secret key in the browser config file.
+
+Daily task answers:
+
+Run the complete `supabase-reactions.sql` file. The daily task uses the October 20 to November 23 trip window, shows one prompt per calendar day, and stores one answer for each participant (`Keshav` and `Aastha`) per day. Only the current day is shown in the page; previous answers remain in the `daily_answers` table.

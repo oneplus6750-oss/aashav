@@ -105,7 +105,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(35, 22, 29, .82) 0%, rgba(35, 22, 29, .44) 42%, rgba(35, 22, 29, .12) 74%, rgba(35, 22, 29, .18) 100%), url('assets/hero.jpg') 58% 32% / cover no-repeat
+      background: linear-gradient(0deg, rgba(35, 22, 29, .82) 0%, rgba(35, 22, 29, .38) 38%, rgba(35, 22, 29, .08) 72%, rgba(35, 22, 29, .14) 100%), url('assets/hero.jpg') 42% 56% / cover no-repeat
     }
 
     .hero-content {
@@ -450,6 +450,35 @@
       max-width: 650px
     }
 
+    .daily-intro {
+      color: var(--muted);
+      margin: 0 auto 16px;
+      max-width: 650px
+    }
+
+    .daily-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .daily-controls label {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 800
+    }
+
+    .daily-controls select {
+      min-height: 44px;
+      border: 1px solid #e8c5d0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: #fffdfb;
+      color: var(--ink)
+    }
+
     .answerrow {
       display: flex;
       gap: 8px;
@@ -467,6 +496,46 @@
       color: var(--ink)
     }
 
+    .answerrow button {
+      white-space: nowrap
+    }
+
+    .daily-answers {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 700px;
+      margin: 22px auto 0;
+      text-align: left
+    }
+
+    .daily-answer {
+      min-height: 92px;
+      padding: 15px;
+      border: 1px solid #edcdd8;
+      border-radius: 18px;
+      background: #fffdfb
+    }
+
+    .daily-answer strong {
+      display: block;
+      color: var(--hot);
+      margin-bottom: 7px
+    }
+
+    .daily-answer p {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.5;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere
+    }
+
+    .daily-answer.empty p {
+      color: var(--muted);
+      font-size: .86rem
+    }
+
     .tiny {
       font-size: .78rem;
       color: var(--muted)
@@ -475,10 +544,13 @@
     .notes {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px
+      gap: 12px;
+      align-items: start
     }
 
     .note {
+      align-self: start;
+      width: 100%;
       border: 1px solid var(--line);
       border-radius: 19px;
       background: #fffdfb;
@@ -523,15 +595,33 @@
     }
 
     .album {
+      position: relative;
       width: 100px;
       height: 100px;
       border-radius: 18px;
       flex-shrink: 0;
-      background: linear-gradient(135deg, #e8b0c1, #916477);
+      overflow: hidden;
+      background: linear-gradient(145deg, #e6a2b055, #6f496f55), url('assets/baarish.jfif') center / cover;
       display: grid;
       place-items: center;
       color: white;
-      font-size: 2.4rem
+      font-size: 2.4rem;
+      box-shadow: inset 0 0 0 1px #ffffff55, 0 10px 24px #533c4824
+    }
+
+    .album {
+      isolation: isolate
+    }
+
+    .album {
+      text-shadow: 0 2px 8px #39233199
+    }
+
+    .album-icon {
+      position: relative;
+      z-index: 1;
+      color: #fffafd;
+      font-weight: 400
     }
 
     .songbox h3 {
@@ -660,6 +750,10 @@
         border-radius: 0
       }
 
+      .hero:before {
+        background-position: 38% 50%
+      }
+
       .hero-content {
         padding: 112px 24px max(28px, env(safe-area-inset-bottom))
       }
@@ -730,6 +824,14 @@
       .answerrow {
         flex-direction: column
       }
+
+      .answerrow button {
+        width: 100%
+      }
+
+      .daily-answers {
+        grid-template-columns: 1fr
+      }
     }
 
     @media(min-width:721px) {
@@ -740,7 +842,7 @@
       }
 
       .hero:before {
-        background-position: 58% 38%
+        background-position: 42% 56%
       }
     }
 
@@ -806,42 +908,6 @@
 
     .mem img {
       cursor: zoom-in
-    }
-
-    .photo-viewer {
-      position: fixed;
-      inset: 0;
-      background: #21171edb;
-      z-index: 30;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 18px
-    }
-
-    .photo-viewer.open {
-      display: flex
-    }
-
-    .photo-viewer img {
-      max-width: 94vw;
-      max-height: 86svh;
-      object-fit: contain;
-      border-radius: 14px;
-      box-shadow: 0 20px 70px #0007
-    }
-
-    .photo-viewer button {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      border: 1px solid #ffffff88;
-      background: #ffffff22;
-      color: white;
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 1.5rem
     }
 
     .photo-viewer {
@@ -981,13 +1047,13 @@
         <p>Swipe, smile, repeat. ♡</p>
       </div>
       <div class="memgrid">
-        <article class="mem"><img src="assets/hero.jpg" alt="Couple mirror selfie">
+        <article class="mem"><img src="assets/cream-mirror.jpg" alt="Couple mirror selfie">
           <div class="memcap"><strong>Bas tum, bas main. ♡</strong><span>Favourite kind of close.</span></div>
         </article>
         <article class="mem"><img src="assets/red-lehenga-full.jpg" alt="Traditional outfit memory">
           <div class="memcap"><strong>Maalkin ✨</strong><span>Aur main bas dekhta reh gaya.</span></div>
         </article>
-        <article class="mem"><img src="assets/restaurant.jpg" alt="Restaurant date">
+        <article class="mem"><img src="assets/denim-date.jpg" alt="Restaurant date">
           <div class="memcap"><strong>Date approved 👍</strong><span>Company toh 10/10.</span></div>
         </article>
       </div>
@@ -1002,11 +1068,11 @@
         <p>Every photo, one little memory.</p>
       </div>
       <div class="memgrid">
-        <article class="mem"><img src="assets/cream-mirror.jpg" alt="Cream outfit mirror selfie">
-          <div class="memcap"><strong>Ek aur mirror selfie</strong><span>“Last one” — hum, every time.</span></div>
+        <article class="mem"><img src="assets/blue-cuddle.jpg" alt="Cream outfit mirror selfie">
+          <div class="memcap"><strong>Mera sukoon ♡</strong><span>“Last one” hum, every time.</span></div>
         </article>
         <article class="mem"><img src="assets/forehead-cuddle.jpg" alt="Forehead cuddle">
-          <div class="memcap"><strong>Mera sukoon ♡</strong><span>Bas thodi der aur.</span></div>
+          <div class="memcap"><strong>School time ♡</strong><span>Bas thodi der aur.</span></div>
         </article>
         <article class="mem"><img src="assets/blue-kiss.jpg" alt="Kiss on the cheek">
           <div class="memcap"><strong>Cheek-kiss privileges</strong><span>Itni cute kyun ho?</span></div>
@@ -1100,10 +1166,17 @@
       <div class="daily">
         <div class="eyebrow dark">today's prompt</div>
         <div class="question" id="question">Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸</div>
-        <p class="tiny">Answer it together on call, or send each other your answers.</p>
-        <div class="answerrow"><input id="answer" placeholder="Tumhara answer, maalkin…"><button class="btn"
+        <p class="daily-intro">Both of you can answer here. Tomorrow brings a fresh question; past answers stay safely saved.</p>
+        <div class="daily-controls"><label for="participant">Answering as</label><select id="participant">
+          <option value="keshav">Keshav</option><option value="aastha" selected>Aastha</option>
+        </select></div>
+        <div class="answerrow"><input id="answer" maxlength="1000" placeholder="Tumhara answer, maalkin…"><button class="btn"
             onclick="saveAnswer()">Save my answer ♡</button></div>
-        <p id="answerStatus" class="tiny"></p>
+        <p id="answerStatus" class="tiny" aria-live="polite"></p>
+        <div class="daily-answers" aria-live="polite">
+          <article class="daily-answer" id="answerCardKeshav"><strong>Keshav</strong><p>Loading today's answer…</p></article>
+          <article class="daily-answer" id="answerCardAastha"><strong>Aastha</strong><p>Loading today's answer…</p></article>
+        </div>
       </div>
     </section>
 
@@ -1136,7 +1209,7 @@
 
     <section>
       <div class="songbox">
-        <div class="album">♫</div>
+        <div class="album" aria-label="Baarish song poster"><span class="album-icon">♫</span></div>
         <div>
           <div class="eyebrow dark">our little soundtrack</div>
           <h3>BAARISH ♡</h3>
@@ -1161,7 +1234,7 @@
   <audio id="yaaaAudio" preload="metadata">
     <source src="yaaaa.mpeg" type="audio/mpeg">
   </audio>
-  <div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo viewer" tabindex="-1">
     <button type="button" aria-label="Close photo viewer" onclick="closePhoto()">×</button>
     <button class="viewer-arrow viewer-prev" type="button" aria-label="Previous photo" onclick="stepPhoto(-1)">‹</button>
     <img id="viewer-img" src="" alt="">
@@ -1173,24 +1246,30 @@
   <script>
 
     const memoryImages = Array.from(document.querySelectorAll(".mem img"));
-    let activePhoto = 0, touchStartX = null;
+    let activePhoto = 0, touchStartX = null, lastPhotoTrigger = null;
     function openPhoto(index) {
       if (!memoryImages.length) return;
       activePhoto = (index + memoryImages.length) % memoryImages.length;
       const img = memoryImages[activePhoto];
+      lastPhotoTrigger = img;
       document.getElementById("viewer-img").src = img.currentSrc || img.src;
       document.getElementById("viewer-img").alt = img.alt || "Our memory";
       document.getElementById("viewer-count").textContent = `${activePhoto + 1} / ${memoryImages.length} · swipe to explore ♡`;
       document.getElementById("photo-viewer").classList.add("open");
       document.body.style.overflow = "hidden";
+      document.getElementById("photo-viewer").focus();
     }
     function stepPhoto(delta) { openPhoto(activePhoto + delta); }
     function closePhoto() {
       document.getElementById("photo-viewer").classList.remove("open");
       document.body.style.overflow = "";
+      if (lastPhotoTrigger) lastPhotoTrigger.focus();
     }
     memoryImages.forEach((img, i) => {
       img.style.cursor = "zoom-in";
+      img.setAttribute("tabindex", "0");
+      img.setAttribute("role", "button");
+      img.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPhoto(i); } });
       img.addEventListener("click", () => openPhoto(i));
     });
     const viewer = document.getElementById("photo-viewer");
@@ -1206,6 +1285,12 @@
       if (e.key === "Escape") closePhoto();
       if (e.key === "ArrowRight") stepPhoto(1);
       if (e.key === "ArrowLeft") stepPhoto(-1);
+      if (e.key === "Tab") {
+        const focusable = [...viewer.querySelectorAll('button')];
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     });
 
 
@@ -1214,6 +1299,7 @@
     function surprise() { let a = ['Oye Aastha, tum meri favourite notification ho. ♡', 'Rasmalai ji, ek smile toh banti hai.', 'Breaking news: tumhari yaad aa rahi hai. Again. 😌', 'Aloo ki bori, sending one virtual hug. 🫂']; toast(a[Math.floor(Math.random() * a.length)]) }
 
     let reactionsClient = null;
+    let dailyClient = null;
     const reactionLabels = { hug: '🫂 hugs', kiss: '😚 kisses' };
 
     function updateDeliveryStatus(rows) {
@@ -1224,10 +1310,22 @@
       status.innerHTML = '<strong>Our love-line is live</strong> · ' + hugs + ' ' + reactionLabels.hug + ' · ' + kisses + ' ' + reactionLabels.kiss;
     }
 
+    function updateDeliveryCounts(counts) {
+      const status = document.getElementById('deliveryStatus');
+      if (!status) return;
+      const byKind = Object.fromEntries((counts || []).map(row => [row.kind, Number(row.count) || 0]));
+      status.innerHTML = '<strong>Our love-line is live</strong> · ' + (byKind.hug || 0) + ' ' + reactionLabels.hug + ' · ' + (byKind.kiss || 0) + ' ' + reactionLabels.kiss;
+    }
+
     async function refreshReactions() {
       if (!reactionsClient) return;
-      const { data, error } = await reactionsClient.from('reactions').select('kind');
-      if (!error) updateDeliveryStatus(data || []);
+      const { data, error } = await reactionsClient.rpc('reaction_counts');
+      if (!error && data) {
+        updateDeliveryCounts(data);
+        return;
+      }
+      const fallback = await reactionsClient.from('reactions').select('kind').limit(5000);
+      if (!fallback.error) updateDeliveryStatus(fallback.data || []);
     }
 
     async function sendReaction(kind) {
@@ -1259,9 +1357,11 @@
         return;
       }
       reactionsClient = window.supabase.createClient(config.url, config.publishableKey);
+      dailyClient = reactionsClient;
       refreshReactions();
       reactionsClient.channel('our-little-world-reactions')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reactions' }, refreshReactions)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_answers' }, loadDailyAnswers)
         .subscribe();
     }());
     function yaa() {
@@ -1271,9 +1371,54 @@
     }
     function achha() { document.getElementById('chaosStatus').textContent = '“Achha ye…” 👀'; }
     function kya() { document.getElementById('chaosStatus').textContent = '“KYA HAI?” 😂 maalkin caught herself in 4K.'; }
-    const prompts = ['Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸', 'Humari kaunsi memory replay karni hai abhi? ♡', 'Aaj ek cheez batao jo tumhe hasaa gayi. 😂', 'Agar abhi chai walk pe ja sakte, toh kya order karte? ☕', 'Ek random compliment bhejo. No thinking, bas bolo. 💌', 'Aaj ka mood ek song se describe karo. 🎧', 'Aaj ek “yaaaaaaaa” voice note banta hai. 😂'];
-    let day = Math.floor((new Date() - new Date('2026-10-12T00:00:00')) / 86400000); document.getElementById('question').textContent = prompts[((day % prompts.length) + prompts.length) % prompts.length];
-    function saveAnswer() { let v = document.getElementById('answer').value.trim(); if (!v) { toast('Pehle kuch likho, maalkin ♡'); return } localStorage.setItem('aastha_daily_' + new Date().toISOString().slice(0, 10), v); document.getElementById('answerStatus').textContent = 'Saved on this device ♡ Send it to each other too!'; toast('Answer saved. Cute. ♡') }
+    const prompts = [
+      'Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸', 'Humari kaunsi memory replay karni hai abhi? ♡', 'Aaj ek cheez batao jo tumhe hasaa gayi. 😂',
+      'Agar abhi chai walk pe ja sakte, toh kya order karte? ☕', 'Ek random compliment bhejo. No thinking, bas bolo. 💌', 'Aaj ka mood ek song se describe karo. 🎧',
+      'Aaj ek “yaaaaaaaa” voice note banta hai. 😂', 'Humari next date ka first stop kya hoga?', 'Aaj tumhe kis cheez par garv hai?',
+      'Mujhe ek tiny imaginary gift do. 🎁', 'Aaj ka comfort food kya hai?', 'Hum dono ka funniest inside joke?', 'Aaj ek word mein mood batao.',
+      'Agar hum teleport kar sake, kahan jaate?', 'Meri kaunsi aadat secretly cute hai?', 'Aaj ka sky kaisa lag raha hai?', 'Humari perfect lazy morning kaisi hogi?',
+      'Aaj mujhe ek silly challenge do.', 'Kis baat ke liye thank you bolna hai?', 'Aaj ka best little moment?', 'Humare relationship ka title kya hoga?',
+      'Aaj ka song recommendation?', 'Mujhe ek three-word message bhejo. 💌', 'Next month ki ek chhoti si wish?', 'Hum dono kis game mein unbeatable hain?',
+      'Aaj kis cheez ne tumhe smile karaya?', 'Meri ek quality jo tum treasure karti ho?', 'Aaj ka dream dinner kya hai?', 'Ek memory jo hamesha warm feel karati hai.',
+      'Aaj humari taraf se ek promise?', 'Agar hum ek cafe kholen, naam kya hoga?', 'Mujhe apna current view dikhao. 📷', 'Aaj ka “I miss you” moment kab aaya?',
+      '23 November ko sabse pehle kya karenge? ♡'
+    ];
+    const dailyStart = new Date(2026, 9, 20);
+    const dailyDate = new Date();
+    const dateKey = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+    const currentDailyDate = dateKey();
+    const day = Math.floor((new Date(dailyDate.getFullYear(), dailyDate.getMonth(), dailyDate.getDate()) - dailyStart) / 86400000);
+    document.getElementById('question').textContent = prompts[((day % prompts.length) + prompts.length) % prompts.length];
+    function renderDailyAnswers(rows) {
+      ['keshav', 'aastha'].forEach(participant => {
+        const card = document.getElementById(participant === 'keshav' ? 'answerCardKeshav' : 'answerCardAastha');
+        const row = rows.find(item => item.participant === participant);
+        card.classList.toggle('empty', !row);
+        card.querySelector('p').textContent = row ? row.answer : 'No answer yet — leave a little piece of your day here.';
+      });
+    }
+    async function loadDailyAnswers() {
+      if (!dailyClient) { renderDailyAnswers([]); document.getElementById('answerStatus').textContent = 'Connect Supabase to share today’s answers.'; return; }
+      const { data, error } = await dailyClient.from('daily_answers').select('participant,answer').eq('task_date', currentDailyDate);
+      if (error) { renderDailyAnswers([]); document.getElementById('answerStatus').textContent = 'Today’s answers could not load. Try refreshing.'; return; }
+      renderDailyAnswers(data || []);
+      const mine = (data || []).find(row => row.participant === document.getElementById('participant').value);
+      document.getElementById('answer').value = mine ? mine.answer : '';
+      document.getElementById('answerStatus').textContent = mine ? 'Your answer is saved for today. You can update it anytime.' : '';
+    }
+    async function saveAnswer() {
+      const answer = document.getElementById('answer').value.trim();
+      const participant = document.getElementById('participant').value;
+      if (!answer) { toast('Pehle kuch likho, maalkin ♡'); return; }
+      if (!dailyClient) { toast('Shared answers will turn on after the Supabase setup. ♡'); return; }
+      const { error } = await dailyClient.from('daily_answers').upsert({ task_date: currentDailyDate, participant, answer }, { onConflict: 'task_date,participant' });
+      if (error) { toast('Could not save today’s answer. Try again.'); return; }
+      document.getElementById('answerStatus').textContent = 'Saved for today — your answer is now visible here. ♡';
+      toast('Answer saved. Cute. ♡');
+      loadDailyAnswers();
+    }
+    document.getElementById('participant').addEventListener('change', loadDailyAnswers);
+    loadDailyAnswers();
     function toggleNote(i) { document.getElementById('note' + i).classList.toggle('show') }
     function finalNote() { let f = document.getElementById('final'); f.style.display = f.style.display === 'none' ? 'block' : 'none' }
     (function () {
