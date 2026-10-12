@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f4">
+  <title>Thoda Sa Tu, Thoda Sa Main ♡</title>
+  <style>
+    :root {
+      --bg: #fff8f4;
+      --ink: #533c48;
+      --muted: #927a84;
+      --pink: #e6a2b0;
+      --hot: #a84f6b;
+      --pale: #fce9ed;
+      --line: #f1d8dc;
+      --cream: #fffdf9
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: clip
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-rounded, "Avenir Next", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      min-height: 44px
+    }
+
+    img {
+      max-width: 100%
+    }
+
+    a {
+      color: inherit
+    }
+
+    .shell {
+      max-width: 1060px;
+      width: min(100% - 32px, 1060px);
+      margin: auto
+    }
+
+    nav {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 4%;
+      right: 4%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      font-size: .82rem;
+      color: white
+    }
+
+    .brand {
+      font-weight: 850;
+      letter-spacing: .11em;
+      color: white;
+      text-shadow: 0 1px 10px #33212b80
+    }
+
+    .navpill {
+      border: 1px solid #ffffff88;
+      border-radius: 99px;
+      background: #ffffff18;
+      padding: 8px 12px;
+      color: white;
+      backdrop-filter: blur(8px)
+    }
+
+    .hero {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      border-radius: 0;
+      background: #c8b0a9;
+      margin-top: 0;
+      margin-bottom: 26px;
+      color: white
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(35, 22, 29, .82) 0%, rgba(35, 22, 29, .44) 42%, rgba(35, 22, 29, .12) 74%, rgba(35, 22, 29, .18) 100%), url('assets/hero.jpg') 58% 32% / cover no-repeat
+    }
+
+    .hero-content {
+      position: relative;
+      padding: 112px 24px max(32px, env(safe-area-inset-bottom));
+      max-width: 720px
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .17em;
+      font-size: .7rem;
+      font-weight: 850
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      line-height: .98;
+      letter-spacing: -.06em;
+      margin: 14px 0
+    }
+
+    .hero h1 em {
+      font-family: Georgia, serif;
+      font-weight: 500;
+      color: #ffdce4
+    }
+
+    .hero p {
+      max-width: 450px;
+      line-height: 1.6;
+      color: #fff2f3
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 99px;
+      padding: 12px 17px;
+      background: var(--hot);
+      color: white;
+      font-weight: 800;
+      box-shadow: 0 8px 20px #533c4820
+    }
+
+    .btn.light {
+      background: #fff8f4;
+      color: var(--hot)
+    }
+
+    .btn.ghost {
+      background: #ffffff22;
+      color: white;
+      border: 1px solid #ffffff66;
+      box-shadow: none
+    }
+
+    .countstrip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: linear-gradient(110deg, #fff0f2, #fffaf0);
+      margin-bottom: 42px
+    }
+
+    .countstrip h2 {
+      font: 500 clamp(1.4rem, 4vw, 2.1rem) Georgia, serif;
+      margin: 4px 0
+    }
+
+    .countstrip p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    .days {
+      text-align: center;
+      color: var(--hot);
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1
+    }
+
+    .days small {
+      display: block;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-top: 6px
+    }
+
+    section {
+      padding: 24px 0 42px
+    }
+
+    .sectiontop {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 18px
+    }
+
+    .sectiontop h2 {
+      font: 500 clamp(1.9rem, 5vw, 2.8rem) Georgia, serif;
+      letter-spacing: -.04em;
+      margin: 4px 0
+    }
+
+    .sectiontop p {
+      color: var(--muted);
+      margin: 0;
+      font-size: .9rem
+    }
+
+    .eyebrow.dark {
+      color: var(--hot)
+    }
+
+    .memgrid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr 1fr;
+      gap: 14px
+    }
+
+    .mem {
+      position: relative;
+      border-radius: 23px;
+      overflow: hidden;
+      min-height: 320px;
+      background: #f2dce1
+    }
+
+    .mem img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      transition: transform .45s
+    }
+
+    .mem:hover img {
+      transform: scale(1.04)
+    }
+
+    .mem:after {
+      content: "";
+      position: absolute;
+      inset: 58% 0 0;
+      background: linear-gradient(transparent, rgba(35, 22, 29, .68))
+    }
+
+    .memcap {
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 12px;
+      color: white;
+      text-shadow: 0 1px 8px #24141b70
+    }
+
+    .memcap strong {
+      display: block;
+      font-size: .78rem;
+      line-height: 1.25;
+      font-weight: 800
+    }
+
+    .memcap span {
+      display: block;
+      font-size: .68rem;
+      line-height: 1.3;
+      color: #fff2f3;
+      margin-top: 3px
+    }
+
+    #more-memories .memgrid {
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    #more-memories .mem {
+      min-height: 290px
+    }
+
+    .feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center
+    }
+
+    .featurephoto {
+      border-radius: 24px;
+      overflow: hidden;
+      transform: rotate(-1deg);
+      box-shadow: 0 15px 40px #533c4815
+    }
+
+    .featurephoto img {
+      display: block;
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover
+    }
+
+    .featuretext {
+      padding: 12px
+    }
+
+    .featuretext h3 {
+      font: 500 clamp(1.7rem, 4vw, 2.5rem) Georgia, serif;
+      margin: 8px 0
+    }
+
+    .featuretext p {
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .quote {
+      font: 500 clamp(1.15rem, 3vw, 1.5rem) Georgia, serif;
+      color: var(--hot)
+    }
+
+    .chaos {
+      background: #fff0f0;
+      border: 1px solid var(--line);
+      border-radius: 27px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: .85fr 1fr;
+      gap: 22px;
+      align-items: center
+    }
+
+    .chaos img {
+      width: min(100%, 400px);
+      max-width: 100%;
+      height: 600px;
+      object-fit: cover;
+      object-position: center bottom;
+      justify-self: center;
+      border-radius: 18px;
+      background: #efdadd
+    }
+
+    .chaos h3 {
+      font: 500 clamp(1.8rem, 4vw, 2.5rem) Georgia, serif;
+      margin: 6px 0
+    }
+
+    .chaos p {
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .chaos-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .status {
+      font-weight: 850;
+      color: var(--hot);
+      min-height: 28px;
+      margin-top: 10px
+    }
+
+    .playroom {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px
+    }
+
+    .playcard {
+      background: #fffdfb;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 19px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between
+    }
+
+    .playcard .icon {
+      font-size: 1.8rem
+    }
+
+    .playcard h3 {
+      margin: 10px 0 4px
+    }
+
+    .playcard p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .playcard button {
+      margin-top: 14px
+    }
+
+    .delivery-status {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: .84rem;
+      text-align: center
+    }
+
+    .delivery-status strong {
+      color: var(--hot)
+    }
+
+    .daily {
+      border-radius: 26px;
+      padding: clamp(22px, 4vw, 38px);
+      background: #f7e7ed;
+      border: 1px solid #edcdd8;
+      text-align: center
+    }
+
+    .daily .question {
+      font: 500 clamp(1.5rem, 4vw, 2.4rem) Georgia, serif;
+      margin: 12px auto;
+      max-width: 650px
+    }
+
+    .answerrow {
+      display: flex;
+      gap: 8px;
+      max-width: 570px;
+      margin: 18px auto 0
+    }
+
+    .answerrow input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid #e8c5d0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fffdfb;
+      color: var(--ink)
+    }
+
+    .tiny {
+      font-size: .78rem;
+      color: var(--muted)
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: #fffdfb;
+      padding: 17px;
+      text-align: left;
+      color: var(--ink)
+    }
+
+    .note strong {
+      display: block;
+      color: var(--hot);
+      margin-bottom: 6px
+    }
+
+    .note p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .revealed {
+      display: none;
+      border-top: 1px dashed var(--line);
+      padding-top: 10px;
+      margin-top: 12px;
+      font-size: .9rem;
+      line-height: 1.55
+    }
+
+    .revealed.show {
+      display: block
+    }
+
+    .songbox {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: #fffdfb;
+      border-radius: 24px
+    }
+
+    .album {
+      width: 100px;
+      height: 100px;
+      border-radius: 18px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #e8b0c1, #916477);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 2.4rem
+    }
+
+    .songbox h3 {
+      margin: 0
+    }
+
+    .songbox p {
+      color: var(--muted);
+      margin: 4px 0 16px;
+      font-size: .9rem
+    }
+
+    .play-song {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 7px 14px 7px 7px;
+      border: 1px solid #d89aad;
+      border-radius: 999px;
+      background: #fff7f8;
+      color: var(--hot);
+      font-size: .86rem;
+      font-weight: 850;
+      line-height: 1;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease
+    }
+
+    .play-song::before {
+      content: "▶";
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      padding-left: 2px;
+      border-radius: 50%;
+      background: var(--hot);
+      color: white;
+      font-size: .72rem
+    }
+
+    .play-song:hover,
+    .play-song:focus-visible {
+      background: white;
+      box-shadow: 0 8px 20px #a84f6b24;
+      transform: translateY(-2px);
+      outline: none
+    }
+
+    .end {
+      text-align: center;
+      padding: 55px 10px 70px
+    }
+
+    .end h2 {
+      font: 500 clamp(2rem, 6vw, 3.4rem) Georgia, serif;
+      margin: 10px 0
+    }
+
+    .end p {
+      max-width: 560px;
+      margin: 0 auto 18px;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .heart {
+      color: var(--hot);
+      animation: pulse 1.4s infinite;
+      display: inline-block
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.15)
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 0 0 28px;
+      color: #a88e98;
+      font-size: .78rem
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 90%;
+      background: #563f4a;
+      color: #fff;
+      padding: 12px 17px;
+      border-radius: 99px;
+      display: none;
+      z-index: 10;
+      box-shadow: 0 8px 30px #533c4830;
+      text-align: center
+    }
+
+    @media(max-width:720px) {
+      nav {
+        left: 16px;
+        right: 16px;
+        padding-top: max(18px, env(safe-area-inset-top));
+        gap: 12px
+      }
+
+      .brand {
+        max-width: 58%;
+        font-size: .72rem;
+        line-height: 1.35
+      }
+
+      .navpill {
+        font-size: .75rem;
+        max-width: 42%
+      }
+
+      .hero {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        min-height: 100svh;
+        border-radius: 0
+      }
+
+      .hero-content {
+        padding: 112px 24px max(28px, env(safe-area-inset-bottom))
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 10.2vw, 3.6rem);
+        line-height: .98
+      }
+
+      .hero-content p {
+        font-size: clamp(.94rem, 4vw, 1.1rem);
+        line-height: 1.48
+      }
+
+      #more-memories .memgrid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      #more-memories .mem {
+        min-height: 250px
+      }
+
+      .countstrip {
+        grid-template-columns: 1fr;
+        text-align: center
+      }
+
+      .memgrid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .mem {
+        min-height: 250px
+      }
+
+      .mem:first-child {
+        grid-column: span 2;
+        min-height: 350px
+      }
+
+      .feature,
+      .chaos {
+        grid-template-columns: 1fr
+      }
+
+      .featuretext {
+        padding: 3px
+      }
+
+      .chaos img {
+        width: 100%;
+        height: min(140vw, 560px)
+      }
+
+      .playroom {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .notes {
+        grid-template-columns: 1fr
+      }
+
+      .sectiontop {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .answerrow {
+        flex-direction: column
+      }
+    }
+
+    @media(min-width:721px) {
+      .hero-content {
+        padding: clamp(32px, 5vw, 72px);
+        padding-top: 132px;
+        padding-bottom: clamp(48px, 8vh, 96px)
+      }
+
+      .hero:before {
+        background-position: 58% 38%
+      }
+    }
+
+    @media(max-width:430px) {
+      #more-memories .memgrid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      #more-memories .mem {
+        min-height: 210px
+      }
+
+      .memcap {
+        padding: 8px 9px
+      }
+
+      .memcap strong {
+        font-size: .72rem
+      }
+
+      .memcap span {
+        font-size: .62rem
+      }
+
+      .playroom {
+        grid-template-columns: 1fr
+      }
+
+      .memgrid {
+        gap: 9px
+      }
+
+      .mem {
+        min-height: 220px
+      }
+
+      .mem:first-child {
+        min-height: 300px
+      }
+
+      .songbox {
+        align-items: flex-start
+      }
+
+      .album {
+        width: 75px;
+        height: 75px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important
+      }
+    }
+
+    .mem img {
+      cursor: zoom-in
+    }
+
+    .photo-viewer {
+      position: fixed;
+      inset: 0;
+      background: #21171edb;
+      z-index: 30;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px
+    }
+
+    .photo-viewer.open {
+      display: flex
+    }
+
+    .photo-viewer img {
+      max-width: 94vw;
+      max-height: 86svh;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 20px 70px #0007
+    }
+
+    .photo-viewer button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      border: 1px solid #ffffff88;
+      background: #ffffff22;
+      color: white;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5rem
+    }
+
+    .photo-viewer {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 13, 19, .96);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      touch-action: pan-y
+    }
+
+    .photo-viewer.open {
+      display: flex
+    }
+
+    .photo-viewer img {
+      max-width: 94vw;
+      max-height: 84svh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 20px 70px #0007;
+      user-select: none;
+      -webkit-user-drag: none
+    }
+
+    .photo-viewer button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      border: 1px solid #ffffff88;
+      background: #ffffff20;
+      color: white;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.5rem;
+      z-index: 2
+    }
+
+    .viewer-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid #ffffff66;
+      background: #ffffff1c;
+      color: white;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .viewer-prev {
+      left: 12px
+    }
+
+    .viewer-next {
+      right: 12px
+    }
+
+    .viewer-count {
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #fff;
+      font-size: .82rem;
+      letter-spacing: .08em
+    }
+
+    @media(max-width:600px) {
+      .photo-viewer {
+        padding: 10px
+      }
+
+      .photo-viewer img {
+        max-width: 96vw;
+        max-height: 80svh
+      }
+
+      .viewer-arrow {
+        width: 38px;
+        height: 38px;
+        background: #ffffff25
+      }
+
+      .viewer-prev {
+        left: 7px
+      }
+
+      .viewer-next {
+        right: 7px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <nav>
+      <div class="brand">♡ THODA SA TU, THODA SA MAIN</div><button class="navpill" onclick="surprise()">ek chhota sa
+        surprise ✨</button>
+    </nav>
+    <header class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">sirf meri Rasmalai ke liye</div>
+        <h1>Oye, <em>Maalkin.</em><br>Miss me? ♡</h1>
+        <p>Thoda sa tu, thoda sa main… aur beech mein bohot saari bakwaas. Distance temporary hai, meri favourite person
+          permanent. ❤️</p>
+        <div class="actions"><button class="btn light"
+            onclick="document.querySelector('#memories').scrollIntoView({behavior:'smooth'})">Humari memories
+            ↓</button><button class="btn ghost" onclick="sendHug()">Ek virtual jhappi 🫂</button></div>
+      </div>
+    </header>
+    <div class="countstrip">
+      <div>
+        <div class="eyebrow dark">next chai date loading…</div>
+        <h2>23 November ko milenge. Pakka. ♡</h2>
+        <p>Tab tak: calls, bakbak, aur daily thoda sa pyaar.</p>
+      </div>
+      <div class="days" id="days" aria-live="polite">--<small>days to go</small></div>
+    </div>
+
+    <section id="memories">
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">camera roll ke best bits</div>
+          <h2>Hum, being us.</h2>
+        </div>
+        <p>Swipe, smile, repeat. ♡</p>
+      </div>
+      <div class="memgrid">
+        <article class="mem"><img src="assets/hero.jpg" alt="Couple mirror selfie">
+          <div class="memcap"><strong>Bas tum, bas main. ♡</strong><span>Favourite kind of close.</span></div>
+        </article>
+        <article class="mem"><img src="assets/red-lehenga-full.jpg" alt="Traditional outfit memory">
+          <div class="memcap"><strong>Maalkin ✨</strong><span>Aur main bas dekhta reh gaya.</span></div>
+        </article>
+        <article class="mem"><img src="assets/restaurant.jpg" alt="Restaurant date">
+          <div class="memcap"><strong>Date approved 👍</strong><span>Company toh 10/10.</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="more-memories">
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">more of our camera roll</div>
+          <h2>Proof that we're cute idiots. ♡</h2>
+        </div>
+        <p>Every photo, one little memory.</p>
+      </div>
+      <div class="memgrid">
+        <article class="mem"><img src="assets/cream-mirror.jpg" alt="Cream outfit mirror selfie">
+          <div class="memcap"><strong>Ek aur mirror selfie</strong><span>“Last one” — hum, every time.</span></div>
+        </article>
+        <article class="mem"><img src="assets/forehead-cuddle.jpg" alt="Forehead cuddle">
+          <div class="memcap"><strong>Mera sukoon ♡</strong><span>Bas thodi der aur.</span></div>
+        </article>
+        <article class="mem"><img src="assets/blue-kiss.jpg" alt="Kiss on the cheek">
+          <div class="memcap"><strong>Cheek-kiss privileges</strong><span>Itni cute kyun ho?</span></div>
+        </article>
+        <article class="mem"><img src="assets/dessert-date.jpg" alt="Dessert date">
+          <div class="memcap"><strong>Dessert aur tum</strong><span>Best part was you.</span></div>
+        </article>
+        <article class="mem"><img src="assets/check-shirt.jpg" alt="Check shirt mirror selfie">
+          <div class="memcap"><strong>Mirror selfie tradition</strong><span>Camera roll bharni hai.</span></div>
+        </article>
+        <article class="mem"><img src="assets/yellow-selfie.jpg" alt="Yellow shirt selfie">
+          <div class="memcap"><strong>Full nautanki mode</strong><span>YAAAAA 😂</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="feature">
+        <div class="featurephoto"><img src="assets/watercolor.jpg" alt="Watercolor-style couple keepsake"></div>
+        <div class="featuretext">
+          <div class="eyebrow dark">the polaroid chapter</div>
+          <h3>Somewhere between chai & us. ♡</h3>
+          <p class="quote">“It started with chai, walks and stupid conversations… and somehow, it became us.”</p>
+          <p>Ek chhoti si photo, but meri favourite story ka part.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">certified nonsense</div>
+          <h2>Achha ye… KYA HAI? 😂</h2>
+        </div>
+        <p>Context? Koi nahi.</p>
+      </div>
+      <div class="chaos">
+        <img src="assets/mask-chaos.jpg" alt="Funny face-mask selfie">
+        <div>
+          <div class="eyebrow dark">humari intellectual conversations</div>
+          <h3>“Achha ye.”<br>“KYA HAI?”</h3>
+          <p>Ek second mein samajh jaana, phir khud hi “kya hai?” pooch lena. Oscar-worthy performance, maalkin.</p>
+          <div class="chaos-buttons"><button class="btn" onclick="achha()">Achha ye 👀</button><button class="btn"
+              onclick="kya()">KYA HAI? 😂</button></div>
+          <div class="status" id="chaosStatus"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">long-distance survival kit</div>
+          <h2>Delivery for you 💌</h2>
+        </div>
+        <p>Tap. Send. Feel loved.</p>
+      </div>
+      <div class="playroom">
+        <article class="playcard">
+          <div>
+            <div class="icon">🫂</div>
+            <h3>Jhappi bhejo</h3>
+            <p>Screen ke paar wali tight hug.</p>
+          </div><button class="btn" onclick="sendHug()">Send hug ♡</button>
+        </article>
+        <article class="playcard">
+          <div>
+            <div class="icon">😚</div>
+            <h3>Pappi bhejo</h3>
+            <p>Ek chhoti si virtual pappi, jaan.</p>
+          </div><button class="btn" onclick="sendKiss()">Send kiss ♡</button>
+        </article>
+        <article class="playcard">
+          <div>
+            <div class="icon">📣</div>
+            <h3>YAAAAAAAAA</h3>
+            <p>For absolutely no reason. Obviously.</p>
+          </div><button class="btn" onclick="yaa()">Play the imaginary sound 😂</button>
+        </article>
+      </div>
+      <p class="delivery-status" id="deliveryStatus" aria-live="polite">Connecting our little love-line…</p>
+    </section>
+
+    <section>
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">aaj ka tiny task</div>
+          <h2>One little thing, every day.</h2>
+        </div>
+      </div>
+      <div class="daily">
+        <div class="eyebrow dark">today's prompt</div>
+        <div class="question" id="question">Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸</div>
+        <p class="tiny">Answer it together on call, or send each other your answers.</p>
+        <div class="answerrow"><input id="answer" placeholder="Tumhara answer, maalkin…"><button class="btn"
+            onclick="saveAnswer()">Save my answer ♡</button></div>
+        <p id="answerStatus" class="tiny"></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">jab meri yaad aaye</div>
+          <h2>Open when…</h2>
+        </div>
+        <p>Mini hugs in text form.</p>
+      </div>
+      <div class="notes">
+        <button class="note" onclick="toggleNote(0)"><strong>🥹 Miss me?</strong>
+          <p>Open for one virtual hug.</p>
+          <div class="revealed" id="note0">Idhar aa, meri Rasmalai. 🫂 Imagine I’m hugging you tight and annoying you
+            until you smile. I miss you too, jaan. Bas thoda sa aur, phir chai date pakki. ♡</div>
+        </button>
+        <button class="note" onclick="toggleNote(1)"><strong>🌧️ Bad day?</strong>
+          <p>You don't have to fix everything.</p>
+          <div class="revealed" id="note1">Maalkin, aaj sab solve karna zaroori nahi hai. Paani piyo, thoda rest karo,
+            aur jab mann kare mujhe bata dena. Main tumhari team mein hoon. Always. ❤️</div>
+        </button>
+        <button class="note" onclick="toggleNote(2)"><strong>🌙 Goodnight?</strong>
+          <p>One tiny message before sleep.</p>
+          <div class="revealed" id="note2">Goodnight meri jaan. Aaj ke liye bas itna: I like you an unreasonable amount.
+            Ab phone side mein rakho aur so jao, warna kal phir sleepy maalkin banogi. 😂❤️</div>
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <div class="songbox">
+        <div class="album">♫</div>
+        <div>
+          <div class="eyebrow dark">our little soundtrack</div>
+          <h3>BAARISH ♡</h3>
+          <p>Mohammed Irfan · Gajendra Verma · Mithoon</p><a class="play-song"
+            href="https://open.spotify.com/track/6ABHr8kYCws5z6gC9Lwith"
+            target="_blank" rel="noopener" aria-label="Play Baarish on Spotify">Play Baarish ♡</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="end">
+      <div class="eyebrow dark">one last thing, jaan</div>
+      <h2>Door hain. Par <span class="heart">dil ke paas.</span></h2>
+      <p>23 November ko saari pending hugs, chai walks, Ludo rematches aur stupid conversations ek saath. Tab tak, take
+        care of yourself for me, okay?</p><button class="btn" onclick="finalNote()">Aakhri surprise ♡</button>
+      <p id="final" style="display:none;margin-top:18px;font:500 1.25rem Georgia,serif;color:var(--hot)">You are my
+        favourite plot twist, meri Aastha. Thank you for turning random days into memories. ❤️</p>
+    </section>
+    <footer>made with pyaar, thodi bakwaas, and one very loud YAAAAAAA ♡</footer>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button type="button" aria-label="Close photo viewer" onclick="closePhoto()">×</button>
+    <button class="viewer-arrow viewer-prev" type="button" aria-label="Previous photo" onclick="stepPhoto(-1)">‹</button>
+    <img id="viewer-img" src="" alt="">
+    <button class="viewer-arrow viewer-next" type="button" aria-label="Next photo" onclick="stepPhoto(1)">›</button>
+    <div class="viewer-count" id="viewer-count"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+
+    const memoryImages = Array.from(document.querySelectorAll(".mem img"));
+    let activePhoto = 0, touchStartX = null;
+    function openPhoto(index) {
+      if (!memoryImages.length) return;
+      activePhoto = (index + memoryImages.length) % memoryImages.length;
+      const img = memoryImages[activePhoto];
+      document.getElementById("viewer-img").src = img.currentSrc || img.src;
+      document.getElementById("viewer-img").alt = img.alt || "Our memory";
+      document.getElementById("viewer-count").textContent = `${activePhoto + 1} / ${memoryImages.length} · swipe to explore ♡`;
+      document.getElementById("photo-viewer").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+    function stepPhoto(delta) { openPhoto(activePhoto + delta); }
+    function closePhoto() {
+      document.getElementById("photo-viewer").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    memoryImages.forEach((img, i) => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => openPhoto(i));
+    });
+    const viewer = document.getElementById("photo-viewer");
+    viewer.addEventListener("touchstart", e => { if (e.changedTouches.length) touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+    viewer.addEventListener("touchend", e => {
+      if (touchStartX === null || !e.changedTouches.length) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 45) stepPhoto(dx < 0 ? 1 : -1);
+      touchStartX = null;
+    });
+    document.addEventListener("keydown", e => {
+      if (!viewer.classList.contains("open")) return;
+      if (e.key === "Escape") closePhoto();
+      if (e.key === "ArrowRight") stepPhoto(1);
+      if (e.key === "ArrowLeft") stepPhoto(-1);
+    });
+
+
+
+    function toast(s) { let t = document.getElementById('toast'); t.textContent = s; t.style.display = 'block'; clearTimeout(window.tt); window.tt = setTimeout(() => t.style.display = 'none', 2600) }
+    function surprise() { let a = ['Oye Aastha, tum meri favourite notification ho. ♡', 'Rasmalai ji, ek smile toh banti hai.', 'Breaking news: tumhari yaad aa rahi hai. Again. 😌', 'Aloo ki bori, sending one virtual hug. 🫂']; toast(a[Math.floor(Math.random() * a.length)]) }
+
+    let reactionsClient = null;
+    const reactionLabels = { hug: '🫂 hugs', kiss: '😚 kisses' };
+
+    function updateDeliveryStatus(rows) {
+      const status = document.getElementById('deliveryStatus');
+      if (!status) return;
+      const hugs = rows.filter(row => row.kind === 'hug').length;
+      const kisses = rows.filter(row => row.kind === 'kiss').length;
+      status.innerHTML = '<strong>Our love-line is live</strong> · ' + hugs + ' ' + reactionLabels.hug + ' · ' + kisses + ' ' + reactionLabels.kiss;
+    }
+
+    async function refreshReactions() {
+      if (!reactionsClient) return;
+      const { data, error } = await reactionsClient.from('reactions').select('kind');
+      if (!error) updateDeliveryStatus(data || []);
+    }
+
+    async function sendReaction(kind) {
+      if (!reactionsClient) {
+        toast('Live sync will turn on after the Supabase setup. ♡');
+        return;
+      }
+      const { error } = await reactionsClient.from('reactions').insert({ kind });
+      if (error) {
+        toast('Could not send that right now. Try again in a moment.');
+        return;
+      }
+      toast(kind === 'hug' ? 'TIGHT JHAPPI delivered to Aastha 🫂❤️' : 'Mwahhh 😚 Pappi delivered, maalkin.');
+      refreshReactions();
+    }
+
+    function sendHug() { sendReaction('hug') }
+    function sendKiss() { sendReaction('kiss') }
+
+    (function setupLiveReactions() {
+      const config = window.SUPABASE_CONFIG || {};
+      const status = document.getElementById('deliveryStatus');
+      if (!config.url || !config.publishableKey || config.url.includes('YOUR_')) {
+        if (status) status.textContent = 'Live hugs and kisses will appear here once the shared love-line is connected. ♡';
+        return;
+      }
+      if (!window.supabase) {
+        if (status) status.textContent = 'The love-line could not load. Please refresh and try again.';
+        return;
+      }
+      reactionsClient = window.supabase.createClient(config.url, config.publishableKey);
+      refreshReactions();
+      reactionsClient.channel('our-little-world-reactions')
+        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reactions' }, refreshReactions)
+        .subscribe();
+    }());
+    function yaa() { toast('YAAAAAAAAAAAAAAAAA 😂 (imagine my actual voice, please)') }
+    function achha() { document.getElementById('chaosStatus').textContent = '“Achha ye…” 👀'; }
+    function kya() { document.getElementById('chaosStatus').textContent = '“KYA HAI?” 😂 maalkin caught herself in 4K.'; }
+    const prompts = ['Aaj ki ek photo bhejo jo tumhe humari yaad dilaye. 📸', 'Humari kaunsi memory replay karni hai abhi? ♡', 'Aaj ek cheez batao jo tumhe hasaa gayi. 😂', 'Agar abhi chai walk pe ja sakte, toh kya order karte? ☕', 'Ek random compliment bhejo. No thinking, bas bolo. 💌', 'Aaj ka mood ek song se describe karo. 🎧', 'Aaj ek “yaaaaaaaa” voice note banta hai. 😂'];
+    let day = Math.floor((new Date() - new Date('2026-10-12T00:00:00')) / 86400000); document.getElementById('question').textContent = prompts[((day % prompts.length) + prompts.length) % prompts.length];
+    function saveAnswer() { let v = document.getElementById('answer').value.trim(); if (!v) { toast('Pehle kuch likho, maalkin ♡'); return } localStorage.setItem('aastha_daily_' + new Date().toISOString().slice(0, 10), v); document.getElementById('answerStatus').textContent = 'Saved on this device ♡ Send it to each other too!'; toast('Answer saved. Cute. ♡') }
+    function toggleNote(i) { document.getElementById('note' + i).classList.toggle('show') }
+    function finalNote() { let f = document.getElementById('final'); f.style.display = f.style.display === 'none' ? 'block' : 'none' }
+    (function () {
+      const display = document.getElementById('days');
+      function updateCountdown() {
+        const now = new Date();
+        let target = new Date(now.getFullYear(), 10, 23, 0, 0, 0);
+        if (now > target) target = new Date(now.getFullYear() + 1, 10, 23, 0, 0, 0);
+        const remaining = target - now;
+        const days = Math.ceil(remaining / 86400000);
+        display.innerHTML = days + '<small>' + (days === 1 ? 'day to go' : 'days to go') + '</small>';
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 60000);
+    }());
+  </script>
+</body>
+
+</html>
