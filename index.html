@@ -536,6 +536,213 @@
       font-size: .86rem
     }
 
+    .diary-upload {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px
+    }
+
+    /* Diary backend is ready, but the diary UI is intentionally hidden for now. */
+    #memory-diary {
+      display: none
+    }
+
+    .diary-upload-card {
+      padding: 16px;
+      border: 1px dashed #d9aeba;
+      border-radius: 18px;
+      background: #fffaf8;
+      text-align: left
+    }
+
+    .diary-upload-card strong {
+      display: block;
+      color: var(--hot);
+      margin-bottom: 9px
+    }
+
+    .diary-upload-card input[type=file],
+    .diary-upload-card input[type=text] {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #e8c5d0;
+      border-radius: 12px;
+      padding: 9px 10px;
+      background: #fffdfb;
+      color: var(--ink);
+      margin-bottom: 8px
+    }
+
+    .diary-upload-card .btn {
+      width: 100%;
+      padding: 10px 12px
+    }
+
+    .diary-upload-status {
+      min-height: 20px;
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .78rem
+    }
+
+    .diary-book-wrap {
+      margin-top: 24px
+    }
+
+    .diary-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px
+    }
+
+    .diary-heading h3 {
+      margin: 0;
+      font: 500 1.45rem Georgia, serif;
+      color: var(--hot)
+    }
+
+    .diary-nav {
+      display: flex;
+      gap: 7px
+    }
+
+    .diary-nav button {
+      width: 40px;
+      min-height: 40px;
+      border: 1px solid #d9aeba;
+      border-radius: 50%;
+      background: #fffdfb;
+      color: var(--hot);
+      font-size: 1.2rem
+    }
+
+    .diary-book {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      perspective: 1200px;
+      transform-origin: center;
+    }
+
+    .diary-book.turn-next {
+      animation: diaryNext .55s ease both
+    }
+
+    .diary-book.turn-prev {
+      animation: diaryPrev .55s ease both
+    }
+
+    @keyframes diaryNext {
+      0% { transform: rotateY(0); opacity: 1 }
+      45% { transform: rotateY(-7deg); opacity: .55 }
+      100% { transform: rotateY(0); opacity: 1 }
+    }
+
+    @keyframes diaryPrev {
+      0% { transform: rotateY(0); opacity: 1 }
+      45% { transform: rotateY(7deg); opacity: .55 }
+      100% { transform: rotateY(0); opacity: 1 }
+    }
+
+    .diary-page {
+      position: relative;
+      min-height: 330px;
+      padding: 22px 20px 20px;
+      border: 2px solid #e8b9b9;
+      background-color: #fffdf5;
+      background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #e9cfd055 28px, transparent 29px);
+      box-shadow: 0 12px 25px #8c5d3c18;
+      overflow: hidden
+    }
+
+    .diary-page::before {
+      content: "♡";
+      position: absolute;
+      top: 8px;
+      right: 13px;
+      color: #df8fa4;
+      font-size: 1.15rem;
+      transform: rotate(12deg)
+    }
+
+    .diary-page::after {
+      content: "✦";
+      position: absolute;
+      bottom: 9px;
+      left: 12px;
+      color: #e6ae88;
+      font-size: .9rem;
+      transform: rotate(-14deg)
+    }
+
+    .diary-page:first-child {
+      border-radius: 20px 5px 5px 20px;
+      transform: rotate(-.5deg)
+    }
+
+    .diary-page:last-child {
+      border-radius: 5px 20px 20px 5px;
+      transform: rotate(.5deg)
+    }
+
+    .diary-page h4 {
+      margin: 0 0 15px;
+      color: var(--hot);
+      font: 500 1.3rem Georgia, serif
+    }
+
+    .diary-polaroid {
+      width: min(100%, 275px);
+      margin: 0 auto;
+      padding: 9px 9px 28px;
+      background: #fff;
+      border: 1px solid #eadfd8;
+      box-shadow: 0 7px 14px #79505c2b;
+      transform: rotate(-1.4deg)
+    }
+
+    .diary-page:last-child .diary-polaroid {
+      transform: rotate(1.4deg)
+    }
+
+    .diary-polaroid img,
+    .diary-polaroid .diary-placeholder,
+    .diary-placeholder {
+      display: block;
+      width: 100%;
+      height: 205px;
+      object-fit: cover;
+      border-radius: 2px;
+      background: #f4dfdf
+    }
+
+    .diary-placeholder {
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .84rem
+    }
+
+    .diary-page p {
+      margin: 22px 2px 0;
+      min-height: 56px;
+      padding: 0 5px 3px;
+      background: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #e9cfd0 28px, transparent 29px);
+      color: var(--ink);
+      line-height: 1.5;
+      overflow-wrap: anywhere
+    }
+
+    .diary-page .diary-empty-caption {
+      color: var(--muted);
+      font-size: .84rem
+    }
+
     .tiny {
       font-size: .78rem;
       color: var(--muted)
@@ -751,7 +958,8 @@
       }
 
       .hero:before {
-        background-position: 38% 50%
+        background-size: auto 115%;
+        background-position: 24% 72%
       }
 
       .hero-content {
@@ -831,6 +1039,19 @@
 
       .daily-answers {
         grid-template-columns: 1fr
+      }
+
+      .diary-upload,
+      .diary-book {
+        grid-template-columns: 1fr
+      }
+
+      .diary-page,
+      .diary-page:first-child,
+      .diary-page:last-child {
+        min-height: 0;
+        border-radius: 18px;
+        transform: none
       }
     }
 
@@ -1086,6 +1307,48 @@
         <article class="mem"><img src="assets/yellow-selfie.jpg" alt="Yellow shirt selfie">
           <div class="memcap"><strong>Full nautanki mode</strong><span>YAAAAA 😂</span></div>
         </article>
+        <article class="mem"><img src="assets/silly-selfie.jpg" alt="Silly selfie together">
+          <div class="memcap"><strong>Certified silly together</strong><span>Serious faces? Never heard of them. ♡</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="memory-diary">
+      <div class="sectiontop">
+        <div>
+          <div class="eyebrow dark">our little memory diary</div>
+          <h2>One page from each day.</h2>
+        </div>
+        <p>Photo + caption, saved forever.</p>
+      </div>
+      <div class="daily">
+        <p class="daily-intro">Upload one little moment each. Your photos become a two-page diary spread for the day.</p>
+        <div class="diary-upload">
+          <div class="diary-upload-card">
+            <strong>Keshav's page</strong>
+            <input id="diaryFileKeshav" type="file" accept="image/jpeg,image/png,image/webp,image/jfif">
+            <input id="diaryCaptionKeshav" type="text" maxlength="240" placeholder="Caption for your day…">
+            <button class="btn" type="button" onclick="uploadDiaryEntry('keshav')">Save Keshav's page ♡</button>
+            <p class="diary-upload-status" id="diaryStatusKeshav" aria-live="polite"></p>
+          </div>
+          <div class="diary-upload-card">
+            <strong>Aastha's page</strong>
+            <input id="diaryFileAastha" type="file" accept="image/jpeg,image/png,image/webp,image/jfif">
+            <input id="diaryCaptionAastha" type="text" maxlength="240" placeholder="Caption for your day…">
+            <button class="btn" type="button" onclick="uploadDiaryEntry('aastha')">Save Aastha's page ♡</button>
+            <p class="diary-upload-status" id="diaryStatusAastha" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="diary-book-wrap">
+          <div class="diary-heading">
+            <h3 id="diaryDateLabel">Loading diary…</h3>
+            <div class="diary-nav"><button type="button" aria-label="Previous diary day" onclick="stepDiary(-1)">‹</button><button type="button" aria-label="Next diary day" onclick="stepDiary(1)">›</button></div>
+          </div>
+          <div class="diary-book" id="diaryBook">
+            <article class="diary-page"><h4>Keshav</h4><div class="diary-placeholder">Loading your page…</div></article>
+            <article class="diary-page"><h4>Aastha</h4><div class="diary-placeholder">Loading her page…</div></article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1362,6 +1625,7 @@
       reactionsClient.channel('our-little-world-reactions')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reactions' }, refreshReactions)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_answers' }, loadDailyAnswers)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_diary' }, loadDiaryEntries)
         .subscribe();
     }());
     function yaa() {
@@ -1419,6 +1683,78 @@
     }
     document.getElementById('participant').addEventListener('change', loadDailyAnswers);
     loadDailyAnswers();
+
+    let diaryRows = [], diaryDates = [], diaryIndex = 0;
+    let diaryDate = currentDailyDate;
+    const diaryDateLabel = document.getElementById('diaryDateLabel');
+    function escapeDiary(value) { return String(value || '').replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char])); }
+    function formatDiaryDate(value) { return new Date(`${value}T12:00:00`).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }); }
+    function renderDiary() {
+      diaryDateLabel.textContent = formatDiaryDate(diaryDate);
+      ['keshav', 'aastha'].forEach(participant => {
+        const row = diaryRows.find(item => item.task_date === diaryDate && item.participant === participant);
+        const title = participant === 'keshav' ? 'Keshav' : 'Aastha';
+        const content = row && row.photo_url
+          ? `<div class="diary-polaroid"><img src="${escapeDiary(row.photo_url)}" alt="${title}'s memory from ${escapeDiary(diaryDate)}"></div><p>${escapeDiary(row.caption) || '<span class="diary-empty-caption">A little moment, saved without words.</span>'}</p>`
+          : `<div class="diary-polaroid"><div class="diary-placeholder">${title}'s page is waiting for a little moment from today. ♡</div></div>`;
+        const page = document.querySelector(participant === 'keshav' ? '.diary-page:first-child' : '.diary-page:last-child');
+        page.innerHTML = `<h4>${title}</h4>${content}`;
+      });
+    }
+    async function loadDiaryEntries() {
+      const tripDates = [];
+      const tripStart = new Date(2026, 9, 20);
+      const tripEnd = new Date(2026, 10, 23);
+      for (const cursor = new Date(tripStart); cursor <= tripEnd; cursor.setDate(cursor.getDate() + 1)) tripDates.push(`${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, '0')}-${String(cursor.getDate()).padStart(2, '0')}`);
+      if (!dailyClient) { diaryRows = []; diaryDates = [...new Set([currentDailyDate, ...tripDates])].sort(); diaryDate = currentDailyDate; diaryIndex = diaryDates.indexOf(diaryDate); renderDiary(); return; }
+      const { data, error } = await dailyClient.from('daily_diary').select('task_date,participant,photo_url,caption').order('task_date', { ascending: true });
+      if (error) { diaryRows = []; diaryDates = [...new Set([currentDailyDate, ...tripDates])].sort(); diaryDate = currentDailyDate; diaryIndex = diaryDates.indexOf(diaryDate); renderDiary(); return; }
+      diaryRows = data || [];
+      diaryDates = [...new Set([currentDailyDate, ...tripDates, ...diaryRows.map(row => row.task_date)])].sort();
+      diaryIndex = Math.max(0, diaryDates.indexOf(diaryDate));
+      diaryDate = diaryDates[diaryIndex] || currentDailyDate;
+      renderDiary();
+    }
+    function stepDiary(delta) {
+      if (!diaryDates.length) return;
+      const nextIndex = Math.max(0, Math.min(diaryDates.length - 1, diaryIndex + delta));
+      if (nextIndex === diaryIndex) return;
+      diaryIndex = nextIndex;
+      diaryDate = diaryDates[diaryIndex];
+      const book = document.getElementById('diaryBook');
+      book.classList.remove('turn-next', 'turn-prev');
+      void book.offsetWidth;
+      book.classList.add(delta > 0 ? 'turn-next' : 'turn-prev');
+      renderDiary();
+    }
+    async function uploadDiaryEntry(participant) {
+      const fileInput = document.getElementById(participant === 'keshav' ? 'diaryFileKeshav' : 'diaryFileAastha');
+      const captionInput = document.getElementById(participant === 'keshav' ? 'diaryCaptionKeshav' : 'diaryCaptionAastha');
+      const status = document.getElementById(participant === 'keshav' ? 'diaryStatusKeshav' : 'diaryStatusAastha');
+      const file = fileInput.files[0];
+      if (!dailyClient) { status.textContent = 'Connect Supabase before saving diary pages.'; return; }
+      if (!file) { status.textContent = 'Choose a photo first.'; return; }
+      const looksLikeImage = file.type.startsWith('image/') || /\.(jpe?g|png|webp|jfif)$/i.test(file.name);
+      if (!looksLikeImage || file.size > 8 * 1024 * 1024) { status.textContent = 'Please choose an image smaller than 8 MB.'; return; }
+      status.textContent = 'Saving your little memory…';
+      const extension = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+      const path = `${currentDailyDate}/${participant}-${Date.now()}.${extension}`;
+      const upload = await dailyClient.storage.from('diary-photos').upload(path, file, { upsert: true, contentType: file.type || 'image/jpeg' });
+      if (upload.error) {
+        console.error('Diary photo upload failed:', upload.error);
+        status.textContent = upload.error.message === 'Bucket not found'
+          ? 'Photo upload failed: create the diary-photos bucket by running the updated Supabase SQL once.'
+          : `Photo upload failed: ${upload.error.message || 'check the Supabase setup.'}`;
+        return;
+      }
+      const publicUrl = dailyClient.storage.from('diary-photos').getPublicUrl(path).data.publicUrl;
+      const saved = await dailyClient.from('daily_diary').upsert({ task_date: currentDailyDate, participant, photo_url: publicUrl, caption: captionInput.value.trim() }, { onConflict: 'task_date,participant' });
+      if (saved.error) { console.error('Diary row save failed:', saved.error); status.textContent = `Photo uploaded, but diary save failed: ${saved.error.message || 'check the table policy.'}`; return; }
+      status.textContent = 'Saved to today’s diary. ♡';
+      fileInput.value = '';
+      loadDiaryEntries();
+    }
+    loadDiaryEntries();
     function toggleNote(i) { document.getElementById('note' + i).classList.toggle('show') }
     function finalNote() { let f = document.getElementById('final'); f.style.display = f.style.display === 'none' ? 'block' : 'none' }
     (function () {

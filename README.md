@@ -23,4 +23,4 @@ Both phones will immediately see the same live hug and kiss totals. The setup in
 
 Daily task answers:
 
-Run the complete `supabase-reactions.sql` file. The daily task uses the October 20 to November 23 trip window, shows one prompt per calendar day, and stores one answer for each participant (`Keshav` and `Aastha`) per day. Only the current day is shown in the page; previous answers remain in the `daily_answers` table.
+If the original reactions setup is already installed, run `supabase-diary-migration.sql` instead of rerunning the original setup. The daily task uses the October 20 to November 23 trip window, shows one prompt per calendar day, and stores one answer for each participant (`Keshav` and `Aastha`) per day. Only the current day is shown in the page; previous answers remain in the `daily_answers` table.
