@@ -88,6 +88,40 @@ begin
   end if;
 end $$;
 
+create table if not exists public.diwali_diyas (
+  id bigint generated always as identity primary key,
+  diwali_date date not null,
+  participant text not null check (participant in ('keshav', 'aastha')),
+  lit_at timestamptz not null default now(),
+  unique (diwali_date, participant)
+);
+
+alter table public.diwali_diyas enable row level security;
+grant select, insert, update on table public.diwali_diyas to anon;
+grant usage, select on sequence public.diwali_diyas_id_seq to anon;
+
+drop policy if exists "Anyone with the private site link can read Diwali diyas" on public.diwali_diyas;
+create policy "Anyone with the private site link can read Diwali diyas"
+on public.diwali_diyas for select to anon using (true);
+
+drop policy if exists "Anyone with the private site link can light Diwali diyas" on public.diwali_diyas;
+create policy "Anyone with the private site link can light Diwali diyas"
+on public.diwali_diyas for insert to anon
+with check (participant in ('keshav', 'aastha'));
+
+drop policy if exists "Anyone with the private site link can update Diwali diyas" on public.diwali_diyas;
+create policy "Anyone with the private site link can update Diwali diyas"
+on public.diwali_diyas for update to anon
+using (participant in ('keshav', 'aastha'))
+with check (participant in ('keshav', 'aastha'));
+
+do $$
+begin
+  if not exists (select 1 from pg_publication_rel pr join pg_class c on c.oid = pr.prrelid join pg_publication p on p.oid = pr.prpubid where p.pubname = 'supabase_realtime' and c.relname = 'diwali_diyas') then
+    alter publication supabase_realtime add table public.diwali_diyas;
+  end if;
+end $$;
+
 insert into storage.buckets (id, name, public)
 values ('diary-photos', 'diary-photos', true)
 on conflict (id) do update set public = true;
