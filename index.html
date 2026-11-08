@@ -1293,6 +1293,41 @@
     .firework.one { top: 30px; left: 14%; } .firework.two { top: 54px; right: 13%; animation-delay: 1.1s; transform: scale(.7); }
     @keyframes burst { 0%, 75%, 100% { opacity: 0; transform: scale(.15); } 18%, 55% { opacity: 1; transform: scale(1); } }
     @media(max-width:600px) { .diya-pair { grid-template-columns: 1fr; } .diwali-banner { padding-inline: 18px; } }
+
+    /* Full-page Diwali polish */
+    body.diwali-mode nav { color: #fff5d7; }
+    body.diwali-mode .brand { color: #fff5d7; text-shadow: 0 1px 12px #5d1f2d99; }
+    body.diwali-mode .navpill { border-color: #ffd98c99; background: #8e303d44; }
+    body.diwali-mode .hero:before { background-image: linear-gradient(0deg, #3b1725d9 0%, #7b2e3c73 43%, #a94a4a1f 78%, #3515222e 100%), url('assets/hero.jpg'); }
+    body.diwali-mode .countstrip,
+    body.diwali-mode .playcard,
+    body.diwali-mode .note,
+    body.diwali-mode .songbox { border-color: #f0c18e; background: linear-gradient(135deg, #fff2d6, #fff8ed); box-shadow: 0 8px 24px #a94a4a12; }
+    body.diwali-mode .countstrip { background: linear-gradient(110deg, #ffe8c7, #fff5df); }
+    body.diwali-mode .mem { box-shadow: 0 10px 22px #9e4a4518; }
+    body.diwali-mode .mem:after { background: linear-gradient(transparent, #4a1828b8); }
+    body.diwali-mode .featurephoto { box-shadow: 0 15px 40px #a94a4a22; }
+    body.diwali-mode .chaos { border-color: #efbf91; background: linear-gradient(135deg, #fff0d5, #ffe3d9); }
+    body.diwali-mode .daily { border-color: #efbd87; background: linear-gradient(135deg, #fff0d4, #ffe3df); }
+    body.diwali-mode .btn { background: linear-gradient(135deg, #c34d45, #9e3049); box-shadow: 0 8px 20px #9e304933; }
+    body.diwali-mode .btn.light { background: #fff7e7; color: #a83d46; }
+    body.diwali-mode .btn.ghost { background: #7e304b66; border-color: #ffdba0aa; }
+    body.diwali-mode .sectiontop h2,
+    body.diwali-mode .featuretext h3,
+    body.diwali-mode .chaos h3,
+    body.diwali-mode .end h2 { color: #9e3049; }
+    body.diwali-mode footer { color: #a46b68; }
+    body.diwali-mode .toast { background: #64263a; }
+
+    .firecracker-btn { position: relative; overflow: hidden; }
+    .firecracker-btn::after { content: "✦"; position: absolute; right: 12px; top: 5px; opacity: .7; animation: twinkle 1s infinite; }
+    .firework-show { position: fixed; inset: 0; z-index: 120; pointer-events: none; overflow: hidden; }
+    .firework-burst { position: absolute; width: 10px; height: 10px; border-radius: 50%; animation: fireworkRise .9s ease-out forwards; }
+    .firework-burst::before { content: ""; position: absolute; inset: -5px; border-radius: 50%; background: #fff2a9; box-shadow: 0 0 18px 5px #ffb74c; }
+    .firework-burst span { position: absolute; left: 50%; top: 50%; width: 4px; height: 42px; border-radius: 50%; transform-origin: 50% 0; background: var(--spark); box-shadow: 0 0 8px var(--spark); animation: fireworkRay .8s ease-out forwards; }
+    @keyframes fireworkRise { 0% { transform: translateY(90px) scale(.2); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
+    @keyframes fireworkRay { 0% { height: 8px; opacity: 1; } 100% { height: 78px; opacity: 0; } }
+    @media(prefers-reduced-motion:reduce) { .firework-burst, .firework-burst span { animation: none; } }
   </style>
 </head>
 
@@ -1310,7 +1345,7 @@
           permanent. ❤️</p>
         <div class="actions"><button class="btn light"
             onclick="document.querySelector('#memories').scrollIntoView({behavior:'smooth'})">Humari memories
-            ↓</button><button class="btn ghost" onclick="sendHug()">Ek virtual jhappi 🫂</button></div>
+            ↓</button><button class="btn ghost" onclick="sendHug()">Ek virtual jhappi 🫂</button><button class="btn firecracker-btn" onclick="launchFireworks()">Phuljhari chalao ✨</button></div>
       </div>
     </header>
     <section class="diwali-banner" aria-labelledby="diwali-title">
@@ -1643,6 +1678,29 @@
 
 
     function toast(s) { let t = document.getElementById('toast'); t.textContent = s; t.style.display = 'block'; clearTimeout(window.tt); window.tt = setTimeout(() => t.style.display = 'none', 2600) }
+    function launchFireworks() {
+      const show = document.createElement('div');
+      show.className = 'firework-show';
+      const colors = ['#ffd166', '#ff7b72', '#f78fb3', '#8ed8c5', '#fff2a9'];
+      for (let burst = 0; burst < 4; burst++) {
+        const spark = document.createElement('div');
+        spark.className = 'firework-burst';
+        spark.style.left = `${18 + Math.random() * 64}%`;
+        spark.style.top = `${18 + Math.random() * 42}%`;
+        spark.style.animationDelay = `${burst * 120}ms`;
+        for (let ray = 0; ray < 12; ray++) {
+          const span = document.createElement('span');
+          span.style.setProperty('--spark', colors[(burst + ray) % colors.length]);
+          span.style.transform = `rotate(${ray * 30}deg)`;
+          span.style.animationDelay = `${burst * 120 + ray * 12}ms`;
+          spark.appendChild(span);
+        }
+        show.appendChild(spark);
+      }
+      document.body.appendChild(show);
+      toast('A little Diwali sky just for us ✨');
+      setTimeout(() => show.remove(), 1800);
+    }
     function surprise() { let a = ['Oye Aastha, tum meri favourite notification ho. ♡', 'Rasmalai ji, ek smile toh banti hai.', 'Breaking news: tumhari yaad aa rahi hai. Again. 😌', 'Aloo ki bori, sending one virtual hug. 🫂']; toast(a[Math.floor(Math.random() * a.length)]) }
 
     let reactionsClient = null;
