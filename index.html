@@ -105,7 +105,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(0deg, rgba(35, 22, 29, .82) 0%, rgba(35, 22, 29, .38) 38%, rgba(35, 22, 29, .08) 72%, rgba(35, 22, 29, .14) 100%), url('assets/hero.jpg') 42% 56% / cover no-repeat
+      background: url('assets/hero.jpg') 42% 56% / cover no-repeat
     }
 
     .hero-content {
@@ -267,7 +267,7 @@
       content: "";
       position: absolute;
       inset: 58% 0 0;
-      background: linear-gradient(transparent, rgba(35, 22, 29, .68))
+      background: rgba(35, 22, 29, .38)
     }
 
     .memcap {
@@ -808,7 +808,7 @@
       border-radius: 18px;
       flex-shrink: 0;
       overflow: hidden;
-      background: linear-gradient(145deg, #e6a2b055, #6f496f55), url('assets/baarish.jfif') center / cover;
+      background: url('assets/baarish.jfif') center / cover;
       display: grid;
       place-items: center;
       color: white;
@@ -1298,14 +1298,14 @@
     body.diwali-mode nav { color: #fff5d7; }
     body.diwali-mode .brand { color: #fff5d7; text-shadow: 0 1px 12px #5d1f2d99; }
     body.diwali-mode .navpill { border-color: #ffd98c99; background: #8e303d44; }
-    body.diwali-mode .hero:before { background-image: linear-gradient(0deg, #3b1725d9 0%, #7b2e3c73 43%, #a94a4a1f 78%, #3515222e 100%), url('assets/hero.jpg'); }
+    body.diwali-mode .hero:before { background-image: url('assets/hero.jpg'); }
     body.diwali-mode .countstrip,
     body.diwali-mode .playcard,
     body.diwali-mode .note,
     body.diwali-mode .songbox { border-color: #f0c18e; background: linear-gradient(135deg, #fff2d6, #fff8ed); box-shadow: 0 8px 24px #a94a4a12; }
     body.diwali-mode .countstrip { background: linear-gradient(110deg, #ffe8c7, #fff5df); }
     body.diwali-mode .mem { box-shadow: 0 10px 22px #9e4a4518; }
-    body.diwali-mode .mem:after { background: linear-gradient(transparent, #4a1828b8); }
+    body.diwali-mode .mem:after { background: rgba(55, 19, 33, .38); }
     body.diwali-mode .featurephoto { box-shadow: 0 15px 40px #a94a4a22; }
     body.diwali-mode .chaos { border-color: #efbf91; background: linear-gradient(135deg, #fff0d5, #ffe3d9); }
     body.diwali-mode .daily { border-color: #efbd87; background: linear-gradient(135deg, #fff0d4, #ffe3df); }
@@ -1328,10 +1328,73 @@
     @keyframes fireworkRise { 0% { transform: translateY(90px) scale(.2); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(0) scale(1); opacity: 1; } }
     @keyframes fireworkRay { 0% { height: 8px; opacity: 1; } 100% { height: 78px; opacity: 0; } }
     @media(prefers-reduced-motion:reduce) { .firework-burst, .firework-burst span { animation: none; } }
+
+    .diwali-intro { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; overflow: hidden; background: #3d1728; color: #fff4d0; transition: opacity .8s ease, visibility .8s ease; }
+    .diwali-intro.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+    .diwali-intro-inner { text-align: center; transform: translateY(-3vh); }
+    .diwali-intro-kicker { text-transform: uppercase; letter-spacing: .2em; font-size: .7rem; font-weight: 850; color: #f7c878; }
+    .diwali-intro h1 { margin: 15px 0 7px; font: 500 clamp(2.2rem, 8vw, 4.5rem) Georgia, serif; }
+    .diwali-intro p { margin: 0; color: #f6d9c0; }
+    .intro-diya { position: relative; width: 190px; height: 170px; margin: 0 auto 15px; }
+    .intro-diya-bowl { position: absolute; left: 18px; right: 18px; bottom: 14px; height: 58px; border-radius: 15px 15px 70px 70px; background: linear-gradient(#f2a04e, #ae3f43); box-shadow: 0 0 0 1px #ffd27a66, 0 0 35px #ff9a3d66; animation: bowlReveal .7s ease-out both; }
+    .intro-diya-bowl::after { content: ""; position: absolute; left: 28px; right: 28px; top: 10px; height: 9px; border-radius: 50%; background: #ffd477; }
+    .intro-diya-flame { position: absolute; left: 50%; bottom: 60px; width: 34px; height: 64px; border-radius: 55% 45% 55% 45%; background: radial-gradient(circle at 50% 75%, #fffbd0 0 18%, #ffd04e 20% 50%, #ee623e 54%); filter: drop-shadow(0 0 20px #ffb83f); transform: translateX(-50%) scale(0); transform-origin: bottom; animation: introFlame 1.25s .65s cubic-bezier(.2,.8,.25,1) forwards, flameDance .8s 1.9s ease-in-out infinite alternate; }
+    .intro-diya-spark { position: absolute; left: 50%; bottom: 110px; width: 4px; height: 4px; border-radius: 50%; background: #fff4b0; box-shadow: -32px -20px #ffd166, 30px -32px #ff8b67, 45px 4px #f78fb3, -47px 6px #ffd166; opacity: 0; animation: introSparks 1.2s 1.65s ease-out forwards; }
+    @keyframes bowlReveal { from { transform: translateY(25px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes introFlame { 0% { opacity: 0; transform: translateX(-50%) scale(0); } 65% { opacity: 1; transform: translateX(-50%) scale(1.12); } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
+    @keyframes introSparks { 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-35px) scale(1.5); } }
+    .diwali-intro-skip { margin-top: 25px; border: 1px solid #f6cb7e88; border-radius: 99px; padding: 9px 15px; background: #ffffff12; color: #fff4d0; cursor: pointer; }
+    .open-card-btn { margin-top: 18px; border: 1px solid #f6cb7e88; border-radius: 99px; padding: 10px 17px; background: #f6c978; color: #5e2638; font-weight: 800; cursor: pointer; }
+    .diwali-card { display: none; width: min(520px, 88vw); margin: 0 auto; padding: 26px 25px 22px; border: 2px solid #e4a65c; border-radius: 7px 22px 9px 20px; background: #fff6dc; color: #6a3044; box-shadow: 0 18px 50px #1d091466; transform: rotate(-1deg); text-align: left; }
+    .diwali-card.open { display: block; animation: cardOpen .65s cubic-bezier(.2,.8,.25,1) both; }
+    .diwali-intro-inner.card-open .intro-diya, .diwali-intro-inner.card-open > .diwali-intro-kicker, .diwali-intro-inner.card-open > h1, .diwali-intro-inner.card-open > p { display: none; }
+    .diwali-intro-inner.card-open > .open-card-btn { display: none; }
+    .diwali-card h2 { margin: 0 0 13px; color: #a83d46; font: 500 1.8rem Georgia, serif; }
+    .diwali-card p { min-height: 145px; margin: 0; color: #6a3044; font: 1.05rem/1.7 "Segoe Print", "Bradley Hand", cursive; white-space: pre-wrap; }
+    .diwali-card .diwali-intro-skip { display: block; margin: 17px auto 0; color: #fff4d0; background: #9e3049; }
+    @keyframes cardOpen { from { opacity: 0; transform: rotate(-5deg) scale(.82); } to { opacity: 1; transform: rotate(-1deg) scale(1); } }
+    body.intro-active { overflow: hidden; }
+    @media(prefers-reduced-motion:reduce) { .diwali-intro { transition: none; } .intro-diya-flame { animation: none; opacity: 1; transform: translateX(-50%) scale(1); } .intro-diya-spark { display: none; } }
+    .diwali-extras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .diwali-extra { padding: 22px 18px; border: 1px solid #efbd87; border-radius: 24px; background: #fff8ea; text-align: center; }
+    .diwali-extra h3 { margin: 0 0 7px; color: #a83d46; font: 500 1.45rem Georgia, serif; }
+    .diwali-extra p { min-height: 42px; margin: 0 0 13px; color: #80546a; font-size: .86rem; line-height: 1.5; }
+    .wish-input { width: 100%; min-height: 44px; border: 1px solid #e8bd91; border-radius: 12px; padding: 10px; background: #fffdf7; color: var(--ink); margin-bottom: 8px; }
+    .wish-result { min-height: 30px; margin-top: 10px; color: #a83d46; font-weight: 800; font-size: .86rem; }
+    .rangoli-art { position: relative; width: 190px; height: 190px; margin: 0 auto 13px; border-radius: 50%; background: radial-gradient(circle, #ffe59d 0 8%, #d94f63 9% 12%, transparent 13% 24%, #f4b74f 25% 28%, transparent 29% 39%, #d95a75 40% 42%, transparent 43%), conic-gradient(from 22.5deg, #e77871 0 12.5%, #ffd37b 12.5% 25%, #c95770 25% 37.5%, #f5a35f 37.5% 50%, #e77871 50% 62.5%, #ffd37b 62.5% 75%, #c95770 75% 87.5%, #f5a35f 87.5%); box-shadow: 0 0 0 5px #fff4d5, 0 0 0 8px #dc7a6e, 0 10px 22px #a83d4630; }
+    .rangoli-art::before { content: ""; position: absolute; inset: 19px; border: 2px dotted #fff0b2; border-radius: 50%; transform: rotate(15deg); pointer-events: none; }
+    .rangoli-art::after { content: "🪔"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.8rem; filter: drop-shadow(0 0 8px #fff1a0); pointer-events: none; }
+    .rangoli-petal { position: absolute; left: 50%; top: 50%; width: 25px; height: 48px; min-height: 25px; padding: 0; border: 2px solid #fff0b2; border-radius: 70% 30% 70% 30%; background: #f8a458; transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-67px); transform-origin: center; cursor: pointer; transition: filter .2s, background .2s, transform .2s; }
+    .rangoli-petal:nth-child(3n) { background: #d85670; } .rangoli-petal:nth-child(4n) { background: #ffd16d; }
+    .rangoli-petal.active { filter: brightness(1.35) drop-shadow(0 0 8px #fff0a8); transform: translate(-50%, -50%) rotate(var(--angle)) translateY(-72px) scale(1.13); }
+    .rangoli-art.rangoli-complete { animation: rangoliComplete 1s ease-in-out infinite alternate; }
+    @keyframes rangoliComplete { to { filter: drop-shadow(0 0 22px #ffd76d); transform: scale(1.04) rotate(4deg); } }
+    .diwali-extra .btn { display: block; width: 100%; margin: 5px 0; }
+    .mithai-fly { position: fixed; z-index: 150; pointer-events: none; width: 70px; height: 70px; animation: mithaiFly 1.35s ease-in forwards; }
+    .mithai-fly.ladoo::before { content: ""; position: absolute; inset: 2px; background: url('assets/motichoor-laddoo.png') center / contain no-repeat; }
+    .mithai-fly.gulab::before, .mithai-fly.gulab::after { content: ""; position: absolute; width: 27px; height: 27px; border-radius: 50%; background: radial-gradient(circle at 30% 22%, #efaa79 0 7%, transparent 8%), linear-gradient(145deg, #8f3d35, #4e1f2c); box-shadow: inset -5px -6px 7px #2b101b77, 0 5px 8px #54202b55; }
+    .mithai-fly.gulab::before { left: 10px; top: 22px; } .mithai-fly.gulab::after { right: 9px; top: 17px; }
+    .mithai-fly.gulab { border-bottom: 7px solid #f0c06f; border-radius: 50%; }
+    .mithai-fly.kaju::before { content: ""; position: absolute; left: 8px; top: 10px; width: 54px; height: 45px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: linear-gradient(145deg, #fff5c4, #dca94f); box-shadow: inset -7px -7px 9px #b77a2f55, 0 6px 10px #7b472d44; }
+    .mithai-fly.kaju::after { content: ""; position: absolute; left: 24px; top: 28px; width: 26px; height: 3px; border-radius: 50%; background: #fff6ceaa; transform: rotate(-25deg); }
+    .mithai-fly.kaju { width: 96px; height: 96px; background: url('assets/kaju-katli.png') center / contain no-repeat; }
+    .mithai-fly.kaju::before, .mithai-fly.kaju::after { display: none; }
+    @keyframes mithaiFly { 0% { transform: translate(-50%, 0) scale(.35) rotate(-12deg); opacity: 0; } 18% { opacity: 1; } 100% { transform: translate(-50%, -190px) scale(1.15) rotate(18deg); opacity: 0; } }
+    @media(max-width:800px) { .diwali-extras { grid-template-columns: 1fr; } }
   </style>
 </head>
 
-<body class="diwali-mode">
+<body class="diwali-mode intro-active">
+  <div class="diwali-intro" id="diwaliIntro" role="dialog" aria-label="Diwali diya opening">
+    <div class="diwali-intro-inner">
+      <div class="intro-diya" aria-hidden="true"><div class="intro-diya-spark"></div><div class="intro-diya-flame"></div><div class="intro-diya-bowl"></div></div>
+      <div class="diwali-intro-kicker">a little light for us</div>
+      <h1>Happy First Diwali 🪔</h1>
+      <p>Lighting up our long-distance celebration…</p>
+      <button class="open-card-btn" type="button" onclick="openDiwaliCard()">Open a little Diwali card 💌</button>
+      <div class="diwali-card" id="diwaliCard"><h2>For my Maalkin, on our first Diwali ♡</h2><p id="diwaliLetter"></p><button class="diwali-intro-skip" type="button" onclick="closeDiwaliIntro()">Enter our Diwali ♡</button></div>
+    </div>
+  </div>
   <div class="shell">
     <nav>
       <div class="brand">♡ THODA SA TU, THODA SA MAIN</div><button class="navpill" onclick="surprise()">ek chhota sa
@@ -1375,6 +1438,14 @@
         </div>
         <div class="rangoli" aria-label="Decorative rangoli" role="img"></div>
         <p id="diyaTogether" class="diya-state">When both diyas glow, our wish is on its way. ♡</p>
+      </div>
+    </section>
+
+    <section id="diwali-extras-section">
+      <div class="diwali-extras">
+        <article class="diwali-extra"><h3>One wish, together ✨</h3><p>Write one tiny wish each. It reveals when both of us have added one.</p><input class="wish-input" id="wishKeshav" maxlength="180" placeholder="Keshav's wish…"><button class="btn" type="button" onclick="saveDiwaliWish('keshav')">Add Keshav's wish</button><input class="wish-input" id="wishAastha" maxlength="180" placeholder="Aastha's wish…"><button class="btn" type="button" onclick="saveDiwaliWish('aastha')">Add Aastha's wish</button><div class="wish-result" id="wishResult">Waiting for our two wishes…</div></article>
+        <article class="diwali-extra"><h3>Make a rangoli 🌸</h3><p>Tap the petals and make our little mandala glow.</p><div class="rangoli-art" id="rangoliGrid" aria-label="Interactive rangoli"></div><button class="btn" type="button" onclick="clearRangoli()">Start again</button></article>
+        <article class="diwali-extra"><h3>Send mithai</h3><p>One proper sweet for the person you miss today.</p><button class="btn" type="button" onclick="sendMithai('ladoo')">Send motichoor laddoo</button><button class="btn" type="button" onclick="sendMithai('kaju')">Send kaju katli</button><div class="wish-result" id="mithaiResult">Mithai counter is open. ♡</div></article>
       </div>
     </section>
 
@@ -1678,6 +1749,29 @@
 
 
     function toast(s) { let t = document.getElementById('toast'); t.textContent = s; t.style.display = 'block'; clearTimeout(window.tt); window.tt = setTimeout(() => t.style.display = 'none', 2600) }
+    let introTimeout = null;
+    function closeDiwaliIntro() {
+      const intro = document.getElementById('diwaliIntro');
+      if (!intro || intro.classList.contains('hide')) return;
+      if (introTimeout) clearTimeout(introTimeout);
+      intro.classList.add('hide');
+      document.body.classList.remove('intro-active');
+      setTimeout(() => intro.remove(), 900);
+    }
+    function openDiwaliCard() {
+      if (introTimeout) clearTimeout(introTimeout);
+      const inner = document.querySelector('.diwali-intro-inner');
+      const card = document.getElementById('diwaliCard');
+      const letter = document.getElementById('diwaliLetter');
+      inner.classList.add('card-open');
+      card.classList.add('open');
+      letter.textContent = '';
+      const message = 'Aastha,\n\nIss Diwali ghar alag hain, par meri har roshni tum tak hi jaati hai. Tum meri favourite person ho, meri favourite notification ho, aur meri sabse pyaari home feeling bhi.\n\nAaj ek diya meri taraf se, ek tumhari taraf se — aur beech mein hum dono ka ek chhota sa wish: jaldi milenge, phir saari pending mithai aur hugs ek saath.\n\nHappy first Diwali, jaan. Tum ho toh har festival thoda zyada bright lagta hai. ♡\n\n— Your Laddu Peda';
+      let index = 0;
+      const type = () => { if (index < message.length) { letter.textContent += message[index++]; setTimeout(type, message[index - 1] === '\n' ? 160 : 24); } };
+      type();
+    }
+    introTimeout = setTimeout(closeDiwaliIntro, 9000);
     function launchFireworks() {
       const show = document.createElement('div');
       show.className = 'firework-show';
@@ -1706,6 +1800,7 @@
     let reactionsClient = null;
     let dailyClient = null;
     const diwaliDate = '2026-11-08';
+    let diyaCelebrationPlayed = false;
     function renderDiyas(rows) {
       const lit = Object.fromEntries((rows || []).map(row => [row.participant, true]));
       ['keshav', 'aastha'].forEach(participant => {
@@ -1713,7 +1808,12 @@
         document.getElementById(`diya${name}`).classList.toggle('diya-lit', !!lit[participant]);
         document.getElementById(`diyaState${name}`).textContent = lit[participant] ? `${name}'s diya is glowing. ✨` : 'Waiting for a little spark…';
       });
-      document.getElementById('diyaTogether').textContent = lit.keshav && lit.aastha ? 'Both flames are glowing. Make your wish together, jaan. 🪔✨' : 'When both diyas glow, our wish is on its way. ♡';
+      const bothLit = lit.keshav && lit.aastha;
+      document.getElementById('diyaTogether').textContent = bothLit ? 'Both flames are glowing. Make your wish together, jaan. 🪔✨' : 'When both diyas glow, our wish is on its way. ♡';
+      if (bothLit && !diyaCelebrationPlayed) {
+        diyaCelebrationPlayed = true;
+        setTimeout(() => launchFireworks(), 350);
+      }
     }
     async function loadDiyas() {
       if (!dailyClient) { renderDiyas([]); return; }
@@ -1727,6 +1827,39 @@
       loadDiyas();
       toast(participant === 'keshav' ? 'Keshav’s diya is glowing for Aastha. 🪔' : 'Aastha’s diya is glowing for Keshav. 🪔');
     }
+    async function loadDiwaliWishes() {
+      if (!dailyClient) return;
+      const { data, error } = await dailyClient.from('diwali_wishes').select('participant,wish').eq('diwali_date', diwaliDate);
+      if (error) return;
+      const wishes = Object.fromEntries((data || []).map(row => [row.participant, row.wish]));
+      const result = document.getElementById('wishResult');
+      result.textContent = wishes.keshav && wishes.aastha ? `Keshav: “${wishes.keshav}” · Aastha: “${wishes.aastha}” ✨` : 'Waiting for our two wishes…';
+    }
+    async function saveDiwaliWish(participant) {
+      const input = document.getElementById(participant === 'keshav' ? 'wishKeshav' : 'wishAastha');
+      if (!input.value.trim()) { toast('Write a tiny wish first. ✨'); return; }
+      if (!dailyClient) { toast('The shared wish needs the Supabase setup first.'); return; }
+      const { error } = await dailyClient.from('diwali_wishes').upsert({ diwali_date: diwaliDate, participant, wish: input.value.trim() }, { onConflict: 'diwali_date,participant' });
+      if (error) { toast('Could not save that wish yet.'); return; }
+      loadDiwaliWishes(); toast('Wish tucked safely into our Diwali. ♡');
+    }
+    let rangoliCelebrationPlayed = false;
+    function clearRangoli() { document.querySelectorAll('.rangoli-petal').forEach(petal => petal.classList.remove('active')); document.getElementById('rangoliGrid').classList.remove('rangoli-complete'); rangoliCelebrationPlayed = false; }
+    function completeRangoli() {
+      if (rangoliCelebrationPlayed) return;
+      rangoliCelebrationPlayed = true;
+      document.getElementById('rangoliGrid').classList.add('rangoli-complete');
+      document.getElementById('diyaKeshav').classList.add('diya-lit');
+      document.getElementById('diyaAastha').classList.add('diya-lit');
+      document.getElementById('diyaTogether').textContent = 'Our rangoli is complete, both diyas are glowing, and the sky is celebrating us. 🪔✨';
+      setTimeout(() => launchFireworks(), 350);
+    }
+    function initRangoli() {
+      const grid = document.getElementById('rangoliGrid');
+      for (let i = 0; i < 16; i++) { const petal = document.createElement('button'); petal.type = 'button'; petal.className = 'rangoli-petal'; petal.style.setProperty('--angle', `${i * 22.5}deg`); petal.setAttribute('aria-label', `Rangoli petal ${i + 1}`); petal.onclick = () => { petal.classList.toggle('active'); if (document.querySelectorAll('.rangoli-petal.active').length === 16) completeRangoli(); }; grid.appendChild(petal); }
+    }
+    function sendMithai(kind) { const sweet = document.createElement('span'); sweet.className = `mithai-fly ${kind}`; sweet.style.left = `${35 + Math.random() * 30}%`; sweet.style.bottom = '18%'; document.body.appendChild(sweet); document.getElementById('mithaiResult').textContent = kind === 'ladoo' ? 'Motichoor laddoo delivered with extra pyaar. ♡' : 'A silver-leaf kaju katli delivered with extra pyaar. ♡'; setTimeout(() => sweet.remove(), 1400); }
+    initRangoli();
     const reactionLabels = { hug: '🫂 hugs', kiss: '😚 kisses' };
 
     function updateDeliveryStatus(rows) {
@@ -1787,11 +1920,13 @@
       dailyClient = reactionsClient;
       refreshReactions();
       loadDiyas();
+      loadDiwaliWishes();
       reactionsClient.channel('our-little-world-reactions')
         .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reactions' }, refreshReactions)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_answers' }, loadDailyAnswers)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'daily_diary' }, loadDiaryEntries)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'diwali_diyas' }, loadDiyas)
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'diwali_wishes' }, loadDiwaliWishes)
         .subscribe();
     }());
     function yaa() {

@@ -88,6 +88,34 @@ begin
   end if;
 end $$;
 
+create table if not exists public.diwali_wishes (
+  id bigint generated always as identity primary key,
+  diwali_date date not null,
+  participant text not null check (participant in ('keshav', 'aastha')),
+  wish text not null check (char_length(wish) between 1 and 180),
+  created_at timestamptz not null default now(),
+  unique (diwali_date, participant)
+);
+
+alter table public.diwali_wishes enable row level security;
+grant select, insert, update on table public.diwali_wishes to anon;
+grant usage, select on sequence public.diwali_wishes_id_seq to anon;
+
+drop policy if exists "Anyone with the private site link can read Diwali wishes" on public.diwali_wishes;
+create policy "Anyone with the private site link can read Diwali wishes"
+on public.diwali_wishes for select to anon using (true);
+
+drop policy if exists "Anyone with the private site link can save Diwali wishes" on public.diwali_wishes;
+create policy "Anyone with the private site link can save Diwali wishes"
+on public.diwali_wishes for insert to anon
+with check (participant in ('keshav', 'aastha') and char_length(wish) between 1 and 180);
+
+drop policy if exists "Anyone with the private site link can update Diwali wishes" on public.diwali_wishes;
+create policy "Anyone with the private site link can update Diwali wishes"
+on public.diwali_wishes for update to anon
+using (participant in ('keshav', 'aastha'))
+with check (participant in ('keshav', 'aastha') and char_length(wish) between 1 and 180);
+
 create table if not exists public.diwali_diyas (
   id bigint generated always as identity primary key,
   diwali_date date not null,
@@ -119,6 +147,13 @@ do $$
 begin
   if not exists (select 1 from pg_publication_rel pr join pg_class c on c.oid = pr.prrelid join pg_publication p on p.oid = pr.prpubid where p.pubname = 'supabase_realtime' and c.relname = 'diwali_diyas') then
     alter publication supabase_realtime add table public.diwali_diyas;
+  end if;
+end $$;
+
+do $$
+begin
+  if not exists (select 1 from pg_publication_rel pr join pg_class c on c.oid = pr.prrelid join pg_publication p on p.oid = pr.prpubid where p.pubname = 'supabase_realtime' and c.relname = 'diwali_wishes') then
+    alter publication supabase_realtime add table public.diwali_wishes;
   end if;
 end $$;
 
