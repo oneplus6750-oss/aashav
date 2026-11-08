@@ -266,8 +266,8 @@
     .mem:after {
       content: "";
       position: absolute;
-      inset: 58% 0 0;
-      background: rgba(35, 22, 29, .38)
+      inset: 76% 0 0;
+      background: linear-gradient(transparent, rgba(35, 22, 29, .58))
     }
 
     .memcap {
@@ -278,7 +278,7 @@
       right: 0;
       padding: 10px 12px;
       color: white;
-      text-shadow: 0 1px 8px #24141b70
+      text-shadow: none
     }
 
     .memcap strong {
@@ -1273,6 +1273,8 @@
     @keyframes twinkle { 50% { opacity: .25; transform: scale(.7) rotate(20deg); } }
 
     .diwali-ritual { padding: clamp(22px, 5vw, 42px); border-radius: 28px; background: #fff1da; border: 1px solid #f0c28f; text-align: center; }
+    .diwali-ritual.celebrating { border-color: #f4a83e; background: radial-gradient(circle at 50% 35%, #fff6b6, transparent 34%), #ffe4bd; box-shadow: 0 0 0 4px #ffd16d55, 0 0 42px #f4a83e66; animation: ritualCelebrate 1.2s ease-in-out infinite alternate; }
+    @keyframes ritualCelebrate { to { transform: translateY(-3px); box-shadow: 0 0 0 8px #ffd16d33, 0 0 58px #f4a83e88; } }
     .diwali-ritual h2 { margin: 8px 0; color: #a83d46; font: 500 clamp(1.8rem, 5vw, 2.8rem) Georgia, serif; }
     .diwali-ritual > p { max-width: 600px; margin: 0 auto 22px; color: #80546a; line-height: 1.6; }
     .diya-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; max-width: 660px; margin: 0 auto; }
@@ -1305,7 +1307,7 @@
     body.diwali-mode .songbox { border-color: #f0c18e; background: linear-gradient(135deg, #fff2d6, #fff8ed); box-shadow: 0 8px 24px #a94a4a12; }
     body.diwali-mode .countstrip { background: linear-gradient(110deg, #ffe8c7, #fff5df); }
     body.diwali-mode .mem { box-shadow: 0 10px 22px #9e4a4518; }
-    body.diwali-mode .mem:after { background: rgba(55, 19, 33, .38); }
+    body.diwali-mode .mem:after { background: linear-gradient(transparent, rgba(55, 19, 33, .58)); }
     body.diwali-mode .featurephoto { box-shadow: 0 15px 40px #a94a4a22; }
     body.diwali-mode .chaos { border-color: #efbf91; background: linear-gradient(135deg, #fff0d5, #ffe3d9); }
     body.diwali-mode .daily { border-color: #efbd87; background: linear-gradient(135deg, #fff0d4, #ffe3df); }
@@ -1801,14 +1803,17 @@
     let dailyClient = null;
     const diwaliDate = '2026-11-08';
     let diyaCelebrationPlayed = false;
+    const optimisticDiyas = {};
     function renderDiyas(rows) {
       const lit = Object.fromEntries((rows || []).map(row => [row.participant, true]));
+      Object.assign(lit, optimisticDiyas);
       ['keshav', 'aastha'].forEach(participant => {
         const name = participant === 'keshav' ? 'Keshav' : 'Aastha';
         document.getElementById(`diya${name}`).classList.toggle('diya-lit', !!lit[participant]);
         document.getElementById(`diyaState${name}`).textContent = lit[participant] ? `${name}'s diya is glowing. ✨` : 'Waiting for a little spark…';
       });
       const bothLit = lit.keshav && lit.aastha;
+      document.querySelector('.diwali-ritual').classList.toggle('celebrating', bothLit);
       document.getElementById('diyaTogether').textContent = bothLit ? 'Both flames are glowing. Make your wish together, jaan. 🪔✨' : 'When both diyas glow, our wish is on its way. ♡';
       if (bothLit && !diyaCelebrationPlayed) {
         diyaCelebrationPlayed = true;
@@ -1821,26 +1826,38 @@
       if (!error) renderDiyas(data || []);
     }
     async function lightDiya(participant) {
-      if (!dailyClient) { toast('The shared diya needs the Supabase setup first. 🪔'); return; }
+      optimisticDiyas[participant] = true;
+      renderDiyas([]);
+      if (!dailyClient) { toast('The diya is glowing here; run the Supabase migration to share it. 🪔'); return; }
       const { error } = await dailyClient.from('diwali_diyas').upsert({ diwali_date: diwaliDate, participant }, { onConflict: 'diwali_date,participant' });
-      if (error) { toast('Could not light the shared diya yet. Try again.'); return; }
+      if (error) { toast(`The diya is glowing here, but sharing failed: ${error.message || 'run the migration.'}`); return; }
       loadDiyas();
       toast(participant === 'keshav' ? 'Keshav’s diya is glowing for Aastha. 🪔' : 'Aastha’s diya is glowing for Keshav. 🪔');
     }
     async function loadDiwaliWishes() {
-      if (!dailyClient) return;
+      const local = JSON.parse(localStorage.getItem(`diwali_wishes_${diwaliDate}`) || '{}');
+      if (!dailyClient) { document.getElementById('wishKeshav').value = local.keshav || ''; document.getElementById('wishAastha').value = local.aastha || ''; document.getElementById('wishResult').textContent = local.keshav && local.aastha ? `Keshav: “${local.keshav}” · Aastha: “${local.aastha}” ✨` : 'Waiting for our two wishes…'; return; }
       const { data, error } = await dailyClient.from('diwali_wishes').select('participant,wish').eq('diwali_date', diwaliDate);
-      if (error) return;
+      if (error) {
+        document.getElementById('wishResult').textContent = local.keshav || local.aastha ? 'Your wish is saved on this device; shared sync needs the Supabase table.' : `Wishes need the Supabase migration: ${error.message || 'table not found.'}`;
+        return;
+      }
       const wishes = Object.fromEntries((data || []).map(row => [row.participant, row.wish]));
+      Object.assign(wishes, local);
+      document.getElementById('wishKeshav').value = wishes.keshav || '';
+      document.getElementById('wishAastha').value = wishes.aastha || '';
       const result = document.getElementById('wishResult');
       result.textContent = wishes.keshav && wishes.aastha ? `Keshav: “${wishes.keshav}” · Aastha: “${wishes.aastha}” ✨` : 'Waiting for our two wishes…';
     }
     async function saveDiwaliWish(participant) {
       const input = document.getElementById(participant === 'keshav' ? 'wishKeshav' : 'wishAastha');
       if (!input.value.trim()) { toast('Write a tiny wish first. ✨'); return; }
-      if (!dailyClient) { toast('The shared wish needs the Supabase setup first.'); return; }
+      const local = JSON.parse(localStorage.getItem(`diwali_wishes_${diwaliDate}`) || '{}');
+      local[participant] = input.value.trim();
+      localStorage.setItem(`diwali_wishes_${diwaliDate}`, JSON.stringify(local));
+      if (!dailyClient) { toast('The wish needs the Supabase setup first.'); return; }
       const { error } = await dailyClient.from('diwali_wishes').upsert({ diwali_date: diwaliDate, participant, wish: input.value.trim() }, { onConflict: 'diwali_date,participant' });
-      if (error) { toast('Could not save that wish yet.'); return; }
+      if (error) { document.getElementById('wishResult').textContent = `Could not save yet: ${error.message || 'run the migration.'}`; return; }
       loadDiwaliWishes(); toast('Wish tucked safely into our Diwali. ♡');
     }
     let rangoliCelebrationPlayed = false;
